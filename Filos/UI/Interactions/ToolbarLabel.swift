@@ -17,7 +17,7 @@ struct ToolbarLabel: View {
     }
     
     var body: some View {
-        if #available(iOS 19.0, *) {
+        if #available(iOS 26.0, *) {
             Label(label, systemImage: symbol)
                 .labelStyle(.iconOnly)
         } else {

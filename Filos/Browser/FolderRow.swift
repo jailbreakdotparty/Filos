@@ -29,23 +29,23 @@ struct FolderRow: View {
                             .frame(width: 20, alignment: .center)
                         VStack(alignment: .leading) {
                             Text(getNameFromInfP(item.fileURL) ?? getBIDFromMCM(item.fileURL) ?? item.name)
-                                .foregroundStyle(item.hidden ? .secondary : .primary)
+                                .compatibleForegroundColor(item.hidden ? .secondary : .primary)
                                 .lineLimit(1)
                                 .truncationMode(.middle)
                             Text(item.fileURL.lastPathComponent)
                                 .font(.footnote)
-                                .foregroundStyle(.secondary)
+                                .compatibleForegroundColor(.secondary)
                                 .lineLimit(1)
                                 .truncationMode(.middle)
                         }
                     } else {
                         Image(systemName: "folder")
                             .frame(width: 20, alignment: .center)
-                            .foregroundStyle(item.hidden ? .secondary : .primary)
+                            .compatibleForegroundColor(item.hidden ? .secondary : .primary)
                         Text(item.name)
                             .lineLimit(1)
                             .truncationMode(.middle)
-                            .foregroundStyle(item.hidden ? .secondary : .primary)
+                            .compatibleForegroundColor(item.hidden ? .secondary : .primary)
                     }
                 }
                 
@@ -57,13 +57,13 @@ struct FolderRow: View {
                     Image(systemName: "info.circle")
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(Color.accentColor)
+                .compatibleForegroundColor(Color.accentColor)
                 .opacity(item.hidden ? 0.8 : 1.0)
                 
                 Chevron()
             }
         }
-        .foregroundStyle(Color(.label))
+        .compatibleForegroundColor(Color(.label))
         .contextMenu {
             if item.readable {
                 Button {
@@ -99,7 +99,7 @@ struct FolderRow: View {
                                 mgr.refreshFiles.toggle()
                             } catch {
                                 print("[!] failed to rename folder: \(error)")
-                                Alertinator.shared.alert(title: "Failed to rename folder!", body: "\(error)")
+                                Alertinator.shared.alert(title: "Failed to rename folder!", body: (error as? String) ?? "Choose a different name, then try again.")
                             }
                         }
                     }
@@ -146,7 +146,7 @@ struct FolderRow: View {
                             }
                             let info = getFileItem(at: item.fileURL)
                             if info.uttype != .folder {
-                                throw "The destination URL is not a folder."
+                                throw "Choose a folder as the destination."
                             }
                             try fm.createDirectory(at: newFolderURL, withIntermediateDirectories: true)
                             let folderURLs = try fm.contentsOfDirectory(at: item.fileURL, includingPropertiesForKeys: [])
@@ -157,7 +157,7 @@ struct FolderRow: View {
                             mgr.refreshFiles.toggle()
                         } catch {
                             print("[!] failed to move folder: \(error)")
-                            Alertinator.shared.alert(title: "Failed to move folder!", body: "\(error)")
+                            Alertinator.shared.alert(title: "Failed to move folder!", body: (error as? String) ?? "Choose another folder, then try again.")
                         }
                     }
                 }
@@ -174,7 +174,7 @@ struct FolderRow: View {
             }
             
             if item.writable {
-                Button(role: .destructive) {
+                CompatibleButton(role: .destructive) {
                     try? fm.removeItem(at: item.fileURL)
                     mgr.refreshFiles.toggle()
                 } label: {

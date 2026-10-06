@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TextViewer: View {
     @EnvironmentObject var mgr: FilosManager
-    @Environment(\.dismiss) var dismiss
+    var onClose: () -> Void
     
     @AppStorage("textViewerSize") var textViewerSize = 11
     @AppStorage("useMonospaced") var useMonospaced = true
@@ -22,32 +22,34 @@ struct TextViewer: View {
     @State private var editText = ""
     @State private var isEditing = false
     
-    init(_ fileURL: URL) {
+    init(_ fileURL: URL, onClose: @escaping () -> Void) {
         self.fileURL = fileURL
+        self.onClose = onClose
     }
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    if isEditing {
-                        TextEditor(text: $editText)
-                            .font(.system(size: CGFloat(textViewerSize), design: useMonospaced ? .monospaced : .default))
-                    } else {
+            Group {
+                if isEditing {
+                    TextEditor(text: $editText)
+                        .font(.system(size: CGFloat(textViewerSize), design: useMonospaced ? .monospaced : .default))
+                } else if #available(iOS 15.0, *) {
+                    ScrollView {
                         Text(fileText)
                             .font(.system(size: CGFloat(textViewerSize), design: useMonospaced ? .monospaced : .default))
                             .padding(5)
                             .textSelection(.enabled)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                } else {
+                    SelectableTextView(text: fileText, size: CGFloat(textViewerSize), monospaced: useMonospaced)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .frame(minHeight: 100, alignment: .topLeading)
             }
             .navigationTitle(fileURL.deletingPathExtension().lastPathComponent)
             .navigationBarTitleDisplayMode(.inline)
             .listStyle(.insetGrouped)
-            .noRefreshable()
-            .safeAreaInset(edge: .bottom) {
+
+            .compatibleBottomInset() {
                 if !file.writable {
                     HStack {
                         Spacer()
@@ -57,7 +59,7 @@ struct TextViewer: View {
                             Image(systemName: "lock")
                                 .padding(10)
                         }
-                        .foregroundStyle(.accent)
+                        .compatibleForegroundColor(.accentColor)
                         .padding(.trailing)
                         .ignoresSafeArea()
                     }
@@ -105,7 +107,7 @@ struct TextViewer: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     if isEditing {
-                        Button(role: .adaptiveConfirm) {
+                        CompatibleButton(role: .adaptiveConfirm) {
                             let res = writeTextIntoFile(fileURL, string: editText)
                             if res {
                                 isEditing = false
@@ -116,7 +118,7 @@ struct TextViewer: View {
                         }
                     } else {
                         Button {
-                            dismiss()
+                            onClose()
                             mgr.refreshFiles.toggle()
                         } label: {
                             ToolbarLabel("Close", symbol: "xmark")

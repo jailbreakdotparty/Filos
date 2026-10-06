@@ -9,10 +9,10 @@ import SwiftUI
 
 enum cornerRad {
     static var component: CGFloat {
-        if #available(iOS 19.0, *) { return 18 } else { return 12 }
+        if #available(iOS 26.0, *) { return 18 } else { return 12 }
     }
     static var platter: CGFloat {
-        if #available(iOS 19.0, *) { return 26 } else { return 18 }
+        if #available(iOS 26.0, *) { return 26 } else { return 18 }
     }
 }
 
@@ -24,7 +24,7 @@ struct SectionPlatter: ViewModifier {
         content
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
-            .background(Color(.secondarySystemBackground), in: .rect(cornerRadius: cornerRad.platter))
+            .compatibleBackground(Color(.secondarySystemBackground), in: .rect(cornerRadius: cornerRad.platter))
     }
 }
 

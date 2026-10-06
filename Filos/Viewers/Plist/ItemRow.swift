@@ -37,23 +37,23 @@ struct ItemRow: View {
                         Text(item.type.label)
                     }
                     Image(systemName: "info.circle")
-                        .overlay {
-                            NavigationLink(destination: ModifyItemPage(item: $item).environmentObject(pmgr)) {
+                        .compatibleOverlay {
+                            PlistEditorLink(item: $item) {
                                 EmptyView()
                             }
                             .opacity(0)
                         }
                 }
-                .listRowBackground(Color(uiColor: .hierarchyLevelColor(hierarchy)))
+                .listRowBackground(Color(.hierarchyLevelColor(hierarchy)))
                 // dictionary inception time
                 if item.isExpanded {
                     if item.type == .data {
                         Text(item.stringVal)
                             .font(.system(size: 12, design: .monospaced))
                             .lineLimit(12)
-                            .listRowBackground(Color(uiColor: .hierarchyLevelColor(hierarchy + 1)))
-                            .overlay {
-                                NavigationLink(destination: ModifyItemPage(item: $item).environmentObject(pmgr)) {
+                            .listRowBackground(Color(.hierarchyLevelColor(hierarchy + 1)))
+                            .compatibleOverlay {
+                                PlistEditorLink(item: $item) {
                                     EmptyView()
                                 }
                                 .opacity(0)
@@ -66,17 +66,17 @@ struct ItemRow: View {
                     }
                 }
             } else {
-                NavigationLink(destination: ModifyItemPage(item: $item).environmentObject(pmgr)) {
+                PlistEditorLink(item: $item) {
                     HStack {
                         Text(item.key)
                             .lineLimit(1)
                         Spacer()
                         Text(item.stringVal)
                             .lineLimit(1)
-                            .foregroundStyle(.secondary)
+                            .compatibleForegroundColor(.secondary)
                     }
                 }
-                .listRowBackground(Color(uiColor: .hierarchyLevelColor(hierarchy)))
+                .listRowBackground(Color(.hierarchyLevelColor(hierarchy)))
             }
         }
         .contextMenu {
@@ -92,5 +92,34 @@ struct ItemRow: View {
                 Label("Copy...", systemImage: "doc.on.doc")
             }
         }
+    }
+}
+
+// Dismissal uses the parent link on iOS 14 and the supported environment action on iOS 15+.
+private struct PlistEditorLink<Label: View>: View {
+    @Binding var item: PlistItem
+    @State private var isPresented = false
+    @ViewBuilder var label: () -> Label
+
+    var body: some View {
+        if #available(iOS 15.0, *) {
+            NavigationLink(destination: DismissiblePlistEditor(item: $item), label: label)
+        } else {
+            NavigationLink(isActive: $isPresented) {
+                ModifyItemPage(item: $item, onClose: { isPresented = false })
+            } label: {
+                label()
+            }
+        }
+    }
+}
+
+@available(iOS 15.0, *)
+private struct DismissiblePlistEditor: View {
+    @Binding var item: PlistItem
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ModifyItemPage(item: $item, onClose: { dismiss() })
     }
 }

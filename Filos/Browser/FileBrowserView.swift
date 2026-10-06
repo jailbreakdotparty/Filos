@@ -62,7 +62,6 @@ struct FileBrowserView: View {
     @State private var previewer: FBPreviewer?
     @State private var quickLookURL: URL?
     @State private var currentState = FileBrowserState.loading
-    @State private var localizedError = ""
     @State private var showFavs = false
     @State private var showLogs = false
     @State private var showSettings = false
@@ -75,7 +74,7 @@ struct FileBrowserView: View {
                     ProgressView()
                         .scaleEffect(1.25)
                     Text("Loading Files...")
-                        .foregroundStyle(.secondary)
+                        .compatibleForegroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity)
             } else if currentState == .loaded {
@@ -88,7 +87,10 @@ struct FileBrowserView: View {
                         }
                     }
                 }
-                .searchable(text: $searchText)
+                .compatibleSearchable(text: $searchText)
+                .compatibleRefreshable {
+                    mgr.refreshFiles.toggle()
+                }
             } else {
                 VStack(spacing: 8) {
                     Image(systemName: currentState.symbol)
@@ -98,9 +100,9 @@ struct FileBrowserView: View {
                     } else {
                         VStack {
                             Text("Failed to load files from path!")
-                            Text(currentState == .unknownError ? localizedError : currentState.description)
+                            Text(currentState == .unknownError ? "This folder couldn’t be opened. Try again." : currentState.description)
                                 .multilineTextAlignment(.center)
-                                .foregroundStyle(.secondary)
+                                .compatibleForegroundColor(.secondary)
                                 .font(.footnote)
                         }
                     }
@@ -149,6 +151,14 @@ struct FileBrowserView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
+                    if #unavailable(iOS 15.0) {
+                        Button {
+                            mgr.refreshFiles.toggle()
+                        } label: {
+                            Label("Refresh", systemImage: "arrow.clockwise")
+                        }
+                        Divider()
+                    }
                     if item.writable {
                         Menu {
                             Button {
@@ -214,7 +224,7 @@ struct FileBrowserView: View {
                                             mgr.refreshFiles.toggle()
                                         } catch {
                                             print("(fm) failed to create symlink: \(error)")
-                                            Alertinator.shared.alert(title: "Failed to create symlink!", body: "\(error)")
+                                            Alertinator.shared.alert(title: "Failed to create symlink!", body: "Check the destination path, then try again.")
                                         }
                                     }
                                 })
@@ -282,27 +292,26 @@ struct FileBrowserView: View {
         }
         .sheet(item: $previewer) { newPrev in
             switch newPrev.type {
-            case .info: InfoViewer(newPrev.file)
-            case .plist: PlistViewer(newPrev.file.fileURL)
-            case .text: TextViewer(newPrev.file.fileURL)
+            case .info: InfoViewer(newPrev.file, onClose: { previewer = nil })
+            case .plist: PlistViewer(newPrev.file.fileURL, onClose: { previewer = nil })
+            case .text: TextViewer(newPrev.file.fileURL, onClose: { previewer = nil })
             default: EmptyView()
             }
         }
         .quickLookPreview($quickLookURL)
         .sheet(isPresented: $showFavs) {
-            FavoritesSheet()
+            FavoritesSheet(onClose: { showFavs = false })
         }
         .sheet(isPresented: $showLogs) {
-            LogView()
+            LogView(onClose: { showLogs = false })
         }
         .sheet(isPresented: $showSettings) {
-            SettingsView()
+            SettingsView(onClose: { showSettings = false })
         }
-        .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item]) { result in
-            handleImport(result)
-        }
-        .refreshable {
-            mgr.refreshFiles.toggle()
+        .sheet(isPresented: $showFileImporter) {
+            DocumentImportPicker(isPresented: $showFileImporter) { url in
+                handleImport(.success(url))
+            }
         }
         .onAppear {
             DispatchQueue.global(qos: .userInitiated).async {
@@ -351,7 +360,6 @@ struct FileBrowserView: View {
             if nserror.code == NSFileReadNoPermissionError {
                 currentState = .noPerms
             } else {
-                localizedError = nserror.localizedDescription
                 currentState = .unknownError
             }
         }
@@ -400,11 +408,11 @@ struct FileBrowserView: View {
                 mgr.refreshFiles.toggle()
             } catch {
                 print("(fm) failed to import file: \(error)")
-                Alertinator.shared.alert(title: "Failed to import file!", body: "\(error)")
+                Alertinator.shared.alert(title: "Failed to import file!", body: "Try again, or choose another file.")
             }
         case .failure(let error):
             print("(fm) failed to import file: \(error)")
-            Alertinator.shared.alert(title: "Failed to import file!", body: "\(error)")
+            Alertinator.shared.alert(title: "Failed to import file!", body: "Try again, or choose another file.")
         }
     }
 }

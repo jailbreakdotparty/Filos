@@ -10,11 +10,16 @@ import SwiftUI
 
 struct ModifyItemPage: View {
     @EnvironmentObject private var pmgr: PlistManager
-    @Environment(\.dismiss) var dismiss
+    var onClose: () -> Void
     
     @State var ogItem: PlistItem = PlistItem(key: "", value: "")
     @Binding var item: PlistItem
     @State private var isEditing = false
+
+    init(item: Binding<PlistItem>, onClose: @escaping () -> Void) {
+        self._item = item
+        self.onClose = onClose
+    }
     
     var body: some View {
         List {
@@ -46,15 +51,10 @@ struct ModifyItemPage: View {
                     ForEach($item.dictVal) { $nestItem in
                         ItemRow(item: $nestItem, hierarchy: 0).environmentObject(pmgr)
                             .disabled(isEditing && nestItem.key == "New Item")
-                            .swipeActions {
-                                if isEditing {
-                                    Button(role: .destructive) {
-                                        item.dictVal.removeAll { $0.id == nestItem.id }
-                                    } label: {
-                                        Image(systemName: "trash")
-                                    }
-                                }
-                            }
+                            .deleteDisabled(!isEditing)
+                    }
+                    .onDelete { offsets in
+                        if isEditing { item.dictVal.remove(atOffsets: offsets) }
                     }
                 case .data:
                     Text(item.stringVal)
@@ -73,12 +73,12 @@ struct ModifyItemPage: View {
             }
             
             if isEditing {
-                Button("Delete Item", role: .destructive) {
+                CompatibleButton("Delete Item", role: .destructive) {
                     let res = pmgr.writePlistItems(delItem: item)
                     if !res {
                         Alertinator.shared.alert(title: "Failed to delete plist item!", body: Errors.checkLogs)
                     } else {
-                        dismiss()
+                        onClose()
                     }
                 }
             }
@@ -87,7 +87,7 @@ struct ModifyItemPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isEditing)
         .listStyle(.grouped)
-        .noRefreshable()
+
         .onAppear {
             Task {
                 let plistItem = pmgr.plistArray.first(where: { $0.id == item.id }) ?? item
@@ -108,7 +108,7 @@ struct ModifyItemPage: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 if isEditing {
-                    Button(role: .adaptiveConfirm) {
+                    CompatibleButton(role: .adaptiveConfirm) {
                         let res = pmgr.writePlistItems(newItem: item)
                         if res {
                             Haptic.shared.play(.soft)

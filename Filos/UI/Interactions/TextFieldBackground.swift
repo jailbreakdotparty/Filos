@@ -21,6 +21,6 @@ struct TextFieldBackground<S: Shape>: ViewModifier {
         content
             .frame(maxWidth: useFullWidth ? .infinity : nil)
             .padding()
-            .background(isEnabled ? Color(.quaternarySystemFill) : Color(.systemGray).opacity(0.2), in: shape)
+            .compatibleBackground(isEnabled ? Color(.quaternarySystemFill) : Color(.systemGray).opacity(0.2), in: shape)
     }
 }

@@ -16,7 +16,7 @@ struct FavoriteItem: Identifiable, Codable {
 
 struct FavoritesSheet: View {
     @EnvironmentObject private var mgr: FilosManager
-    @Environment(\.dismiss) var dismiss
+    var onClose: () -> Void
     
     @AppStorage("favList") var favList: [FavoriteItem] = []
     
@@ -30,21 +30,21 @@ struct FavoritesSheet: View {
                 Section {
                     Button {
                         mgr.push(URL.documentsDirectory)
-                        dismiss()
+                        onClose()
                     } label: {
                         NavigationLabel(text: "Documents")
                     }
                     
                     Button {
-                        mgr.push(URL.temporaryDirectory)
-                        dismiss()
+                        mgr.push(fm.temporaryDirectory)
+                        onClose()
                     } label: {
                         NavigationLabel(text: "Temp")
                     }
                     
                     Button {
                         mgr.push(URL.documentsDirectory.deletingLastPathComponent())
-                        dismiss()
+                        onClose()
                     } label: {
                         NavigationLabel(text: "Container")
                     }
@@ -58,23 +58,23 @@ struct FavoritesSheet: View {
                             Button {
                                 let path = generateNavPath(path: fav.path)
                                 mgr.push(URL(fileURLWithPath: path))
-                                dismiss()
+                                onClose()
                             } label: {
                                 HStack {
                                     VStack(alignment: .leading) {
                                         Text(fav.label)
                                         Text(fav.path)
                                             .font(.footnote)
-                                            .foregroundStyle(.secondary)
+                                            .compatibleForegroundColor(.secondary)
                                     }
                                     Spacer()
                                     Chevron()
                                 }
                             }
-                            .foregroundStyle(Color(.label))
+                            .compatibleForegroundColor(Color(.label))
                             .padding(.vertical, !isSolariumUI() ? 1 : 0)
                             .contextMenu {
-                                Button(role: .destructive) {
+                                CompatibleButton(role: .destructive) {
                                     favList.removeAll { $0.id == fav.id }
                                 } label: {
                                     Label("Remove", systemImage: "trash")
@@ -88,7 +88,7 @@ struct FavoritesSheet: View {
             }
             .navigationTitle("Favorites")
             .navigationBarTitleDisplayMode(.inline)
-            .noRefreshable()
+
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -100,7 +100,7 @@ struct FavoritesSheet: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        dismiss()
+                        onClose()
                     } label: {
                         ToolbarLabel("Close", symbol: "xmark")
                     }
@@ -124,7 +124,7 @@ struct FavoritesSheet: View {
                     }
                     .navigationTitle("Add Item")
                     .navigationBarTitleDisplayMode(.inline)
-                    .noRefreshable()
+
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
                             Button {
@@ -134,7 +134,7 @@ struct FavoritesSheet: View {
                             }
                         }
                         ToolbarItem(placement: .topBarTrailing) {
-                            Button(role: .adaptiveConfirm) {
+                            CompatibleButton(role: .adaptiveConfirm) {
                                 if label.isEmpty || label.isEmpty || favList.compactMap({ $0.path }).contains(path) {
                                     Alertinator.shared.alert(title: "Invaild Favorite!", body: "Please make sure that you've typed in both the label and path fields, and that the path you put in is not the same as any paths currently added as favorites.")
                                 } else {

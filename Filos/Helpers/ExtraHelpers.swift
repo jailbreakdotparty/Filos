@@ -31,10 +31,10 @@ func sbxConsume(_ token: String) -> Bool {
 }
 
 // make strings compatiable with errors
-extension String: @retroactive Error {}
+extension String: Error {}
 
 // allows us to put arrays into AppStorage
-extension Array: @retroactive RawRepresentable where Element: Codable {
+extension Array: RawRepresentable where Element: Codable {
     public init?(rawValue: String) {
         guard let data = rawValue.data(using: .utf8),
               let result = try? JSONDecoder().decode([Element].self, from: data)
@@ -55,7 +55,7 @@ extension Array: @retroactive RawRepresentable where Element: Codable {
 }
 
 func isSolariumUI() -> Bool {
-    if #available(iOS 19.0, *) {
+    if #available(iOS 26.0, *) {
         return true
     }
     return false
@@ -71,11 +71,14 @@ func machineName() -> String {
     }
 }
 
+@available(iOS 15.0, *)
 extension ButtonRole {
     static var adaptiveConfirm: ButtonRole? {
-        if #available(iOS 19.0, *) {
+        #if compiler(>=6.2)
+        if #available(iOS 26.0, *) {
             return .confirm
         }
+        #endif
         return nil
     }
 }

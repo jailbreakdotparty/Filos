@@ -28,9 +28,9 @@ struct CompactAlert: View {
                     .font(!title.isEmpty ? .subheadline : .body)
             }
         }
-        .foregroundStyle(color)
+        .compatibleForegroundColor(color)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(color.opacity(0.2), in: .rect(cornerRadius: cornerRad.platter))
+        .compatibleBackground(color.opacity(0.2), in: .rect(cornerRadius: cornerRad.platter))
     }
 }

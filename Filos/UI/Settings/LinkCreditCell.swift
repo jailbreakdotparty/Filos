@@ -8,7 +8,7 @@
 import SwiftUI
 
 var creditCell: CGFloat {
-    if #available(iOS 19.0, *) { return 14 } else { return 16 }
+    if #available(iOS 26.0, *) { return 14 } else { return 16 }
 }
 
 struct LinkCreditCell: View {
@@ -38,12 +38,12 @@ struct LinkCreditCell: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.body.weight(.semibold))
-                        .foregroundStyle(.tertiary)
+                        .compatibleForegroundColor(Color(.tertiaryLabel))
                         .imageScale(.small)
                 }
             }
         }
-        .foregroundStyle(Color(.label))
+        .compatibleForegroundColor(Color(.label))
     }
 }
 
@@ -52,14 +52,14 @@ struct LinkCreditIcon: View {
     var image: Image
     
     var body: some View {
-        if #available(iOS 19.0, *) {
+        if #available(iOS 26.0, *) {
             image
                 .resizable()
                 .scaledToFit()
                 .frame(width: 40, height: 40)
                 .background(Color(.systemGray6))
                 .clipShape(.capsule)
-                .glassEffect(.regular, in: .capsule)
+                .compatibleGlassEffect(in: .capsule)
         } else {
             image
                 .resizable()
@@ -67,7 +67,7 @@ struct LinkCreditIcon: View {
                 .frame(width: 40, height: 40)
                 .background(Color(.systemGray6))
                 .clipShape(.rect(cornerRadius: 12))
-                .overlay {
+                .compatibleOverlay {
                     RoundedRectangle(cornerRadius: 12)
                         .stroke(Color.primary.opacity(0.2), lineWidth: 1)
                 }

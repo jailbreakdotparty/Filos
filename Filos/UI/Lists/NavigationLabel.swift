@@ -27,7 +27,7 @@ struct NavigationLabel: View {
                     Text(text)
                     Text(footer)
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .compatibleForegroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -35,19 +35,19 @@ struct NavigationLabel: View {
                 Chevron()
             }
         }
-        .foregroundStyle(Color(.label))
+        .compatibleForegroundColor(Color(.label))
     }
 }
 
 var chevronSpacing: CGFloat {
-    if #available(iOS 19.0, *) { return 1 } else { return 0 }
+    if #available(iOS 26.0, *) { return 1 } else { return 0 }
 }
 
 struct Chevron: View {
     var body: some View {
         Image(systemName: "chevron.right")
             .font(.body.weight(.semibold))
-            .foregroundStyle(Color(uiColor: .tertiaryLabel))
+            .compatibleForegroundColor(Color(.tertiaryLabel))
             .imageScale(.small)
             .padding(.trailing, chevronSpacing)
     }

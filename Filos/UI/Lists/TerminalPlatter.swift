@@ -8,7 +8,7 @@
 import SwiftUI
 
 var terminalRad: CGFloat {
-    if #available(iOS 19.0, *) { return 22 } else { return 14 }
+    if #available(iOS 26.0, *) { return 22 } else { return 14 }
 }
 
 struct TerminalPlatter: ViewModifier {
@@ -16,6 +16,6 @@ struct TerminalPlatter: ViewModifier {
         content
             .frame(height: 250)
             .padding(.horizontal)
-            .background(Color(.quaternarySystemFill), in: .rect(cornerRadius: terminalRad))
+            .compatibleBackground(Color(.quaternarySystemFill), in: .rect(cornerRadius: terminalRad))
     }
 }

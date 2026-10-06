@@ -10,11 +10,12 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct InfoViewer: View {
-    @Environment(\.dismiss) var dismiss
+    var onClose: () -> Void
     var file: FileItem
     
-    init(_ file: FileItem) {
+    init(_ file: FileItem, onClose: @escaping () -> Void) {
         self.file = file
+        self.onClose = onClose
     }
     
     var body: some View {
@@ -54,12 +55,12 @@ struct InfoViewer: View {
             .navigationTitle("\(file.type.rawValue.capitalized) Info")
             .navigationBarTitleDisplayMode(.inline)
             .adaptiveListMargin()
-            .noRefreshable()
+
             .listStyle(.insetGrouped)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        dismiss()
+                        onClose()
                     } label: {
                         ToolbarLabel("Close", symbol: "xmark")
                     }
@@ -83,7 +84,7 @@ struct InfoViewer: View {
                 Text(label)
                 Spacer()
                 Text(string)
-                    .foregroundStyle(.secondary)
+                    .compatibleForegroundColor(.secondary)
             }
             .contextMenu {
                 Button {
@@ -109,7 +110,7 @@ struct InfoViewer: View {
                 Text(label)
                 Spacer()
                 Image(systemName: bool ? "checkmark" : "xmark")
-                    .foregroundStyle(.secondary)
+                    .compatibleForegroundColor(.secondary)
             }
         }
     }

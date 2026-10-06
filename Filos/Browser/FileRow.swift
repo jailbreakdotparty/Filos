@@ -39,50 +39,10 @@ struct FileRow: View {
     @State private var conformsPlist = false
     @State private var conformsZip = false
     
+    @ViewBuilder
     var body: some View {
-        Button {
-            fileTapAction()
-        } label: {
-            HStack(spacing: fileRowSpacing) {
-                Image(systemName: item.type == .file ? "doc" : "arrow.up.right.circle")
-                    .foregroundStyle(item.hidden ? .secondary : .primary)
-                    .frame(width: 20, alignment: .center)
-                
-                VStack(alignment: .leading) {
-                    Text(item.name)
-                        .foregroundStyle(item.hidden ? .secondary : .primary)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                    
-                    if !hideDates && !item.modifiedDateStr.isEmpty && item.type == .file {
-                        Text(item.modifiedDateStr)
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                    }
-                }
-                Spacer()
-                
-                if item.type == .file {
-                    Text("\(ByteCountFormatter.string(fromByteCount: Int64(item.size), countStyle: .file))")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
-                
-                Button {
-                    previewer = FBPreviewer(type: .info, file: item)
-                } label: {
-                    Image(systemName: "info.circle")
-                }
-                .buttonStyle(.plain)
-                .foregroundStyle(Color.accentColor)
-                .opacity(item.hidden ? 0.8 : 1.0)
-                
-                if item.type == .symlink {
-                    Chevron()
-                }
-            }
-        }
+        if #available(iOS 15.0, *) {
+            row
         .swipeActions {
             if mgr.isFavorited(item) {
                 Button {
@@ -99,23 +59,72 @@ struct FileRow: View {
                 }
                 .tint(.yellow)
             }
-            
+
             if item.writable {
-                Button(role: .destructive) {
+                CompatibleButton(role: .destructive) {
                     do {
                         try fm.removeItem(at: item.fileURL)
                         mgr.refreshFiles.toggle()
                     } catch {
                         print("[!] failed to delete file: \(error)")
-                        Alertinator.shared.alert(title: "Failed to delete file!", body: error.localizedDescription)
+                        Alertinator.shared.alert(title: "Failed to delete file!", body: "Check that you can change this folder, then try again.")
                     }
                 } label: {
                     Image(systemName: "trash")
                 }
             }
         }
+        } else {
+            row
+        }
+    }
+
+    private var row: some View {
+        Button {
+            fileTapAction()
+        } label: {
+            HStack(spacing: fileRowSpacing) {
+                Image(systemName: item.type == .file ? "doc" : "arrow.up.right.circle")
+                    .compatibleForegroundColor(item.hidden ? .secondary : .primary)
+                    .frame(width: 20, alignment: .center)
+                
+                VStack(alignment: .leading) {
+                    Text(item.name)
+                        .compatibleForegroundColor(item.hidden ? .secondary : .primary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                    
+                    if !hideDates && !item.modifiedDateStr.isEmpty && item.type == .file {
+                        Text(item.modifiedDateStr)
+                            .font(.footnote)
+                            .compatibleForegroundColor(.secondary)
+                            .lineLimit(1)
+                    }
+                }
+                Spacer()
+                
+                if item.type == .file {
+                    Text("\(ByteCountFormatter.string(fromByteCount: Int64(item.size), countStyle: .file))")
+                        .font(.footnote)
+                        .compatibleForegroundColor(.secondary)
+                }
+                
+                Button {
+                    previewer = FBPreviewer(type: .info, file: item)
+                } label: {
+                    Image(systemName: "info.circle")
+                }
+                .buttonStyle(.plain)
+                .compatibleForegroundColor(Color.accentColor)
+                .opacity(item.hidden ? 0.8 : 1.0)
+                
+                if item.type == .symlink {
+                    Chevron()
+                }
+            }
+        }
         .padding(.vertical, !hideDates && !item.modifiedDateStr.isEmpty && item.type == .file && !isSolariumUI() ? 1 : 0)
-        .foregroundStyle(Color(.label))
+        .compatibleForegroundColor(Color(.label))
         .onAppear {
             DispatchQueue.global(qos: .userInitiated).async {
                 conformsText = conformsToTextViewer(item.fileURL)
@@ -273,7 +282,7 @@ struct FileRow: View {
             }
             
             if item.writable {
-                Button(role: .destructive) {
+                CompatibleButton(role: .destructive) {
                     do {
                         try fm.removeItem(at: item.fileURL)
                         mgr.refreshFiles.toggle()

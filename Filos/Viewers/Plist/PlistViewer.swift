@@ -10,14 +10,15 @@ import SwiftUI
 
 struct PlistViewer: View {
     @StateObject private var pmgr = PlistManager.shared
-    @Environment(\.dismiss) var dismiss
+    var onClose: () -> Void
     var fileURL: URL
     
     @State private var file = clearFileItem
     @State private var showErrorView = false
     
-    init(_ fileURL: URL) {
+    init(_ fileURL: URL, onClose: @escaping () -> Void) {
         self.fileURL = fileURL
+        self.onClose = onClose
     }
     
     var body: some View {
@@ -35,8 +36,8 @@ struct PlistViewer: View {
             .navigationTitle(file.fileURL.lastPathComponent)
             .navigationBarTitleDisplayMode(.inline)
             .listStyle(.inset)
-            .noRefreshable()
-            .safeAreaInset(edge: .bottom) {
+
+            .compatibleBottomInset() {
                 if !pmgr.isWritable {
                     HStack {
                         Spacer()
@@ -46,7 +47,7 @@ struct PlistViewer: View {
                             Image(systemName: "lock")
                                 .padding(10)
                         }
-                        .foregroundStyle(.accent)
+                        .compatibleForegroundColor(.accentColor)
                         .padding(.trailing)
                         .ignoresSafeArea()
                     }
@@ -66,7 +67,7 @@ struct PlistViewer: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        dismiss()
+                        onClose()
                     } label: {
                         ToolbarLabel("Close", symbol: "xmark")
                     }

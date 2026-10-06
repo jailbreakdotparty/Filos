@@ -10,12 +10,13 @@ import SwiftUI
 
 struct LogView: View {
     @EnvironmentObject var mgr: FilosManager
-    @Environment(\.dismiss) var dismiss
+    var onClose: () -> Void
     
     var body: some View {
         NavigationView {
-            GeometryReader { _ in
-                ScrollViewReader { proxy in
+            Group {
+                if #available(iOS 15.0, *) {
+                    ScrollViewReader { proxy in
                     ScrollView {
                         Text(mgr.logOutput)
                             .font(.system(size: 11, design: .monospaced))
@@ -32,11 +33,14 @@ struct LogView: View {
                     .onChange(of: mgr.logOutput) { _ in
                         proxy.scrollTo(0)
                     }
+                    }
+                } else {
+                    SelectableTextView(text: mgr.logOutput, size: 11, followOutput: true)
                 }
             }
             .navigationTitle("Logs")
             .navigationBarTitleDisplayMode(.inline)
-            .noRefreshable()
+
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Menu {
@@ -52,7 +56,7 @@ struct LogView: View {
                                 formatter.dateFormat = "MM-dd-yyyy-HHmmss"
                                 let date = formatter.string(from: Date())
                                 
-                                let tempURL = URL.temporaryDirectory.appendingPathComponent("Filos-Log-\(date)").appendingPathExtension("txt")
+                                let tempURL = fm.temporaryDirectory.appendingPathComponent("Filos-Log-\(date)").appendingPathExtension("txt")
                                 guard let data = mgr.logOutput.data(using: .utf8) else {
                                     throw "failed to create data from log string"
                                 }
@@ -73,7 +77,7 @@ struct LogView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        dismiss()
+                        onClose()
                     } label: {
                         ToolbarLabel("Close", symbol: "xmark")
                     }

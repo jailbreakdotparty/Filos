@@ -17,7 +17,7 @@ struct HeaderLabel: View {
     }
     
     var body: some View {
-        if #available(iOS 19.0, *) {
+        if #available(iOS 26.0, *) {
             HStack(spacing: 10) {
                 Image(systemName: symbol)
                     .frame(width: 22, alignment: .center)

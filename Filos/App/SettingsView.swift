@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var mgr: FilosManager
-    @Environment(\.dismiss) var dismiss
+    var onClose: () -> Void
     
     @AppStorage("sbxToken") var sbxToken = ""
     @AppStorage("consumeOnLaunch") var consumeOnLaunch = false
@@ -34,7 +34,7 @@ struct SettingsView: View {
                             Image(systemName: mgr.tokenVaild ? "checkmark.circle" : "xmark.circle")
                             Text(mgr.tokenVaild ? "Valid" : "Invalid")
                         }
-                        .foregroundStyle(mgr.tokenVaild ? .green : .red)
+                        .compatibleForegroundColor(mgr.tokenVaild ? .green : .red)
                         Spacer()
                         if !mgr.tokenVaild {
                             Button("Consume") {
@@ -50,7 +50,7 @@ struct SettingsView: View {
                                 }
                             }
                         } else {
-                            Button("Eject", role: .destructive) {
+                            CompatibleButton("Eject", role: .destructive) {
                                 sbxToken = ""
                                 mgr.tokenVaild = false
                                 Alertinator.shared.alert(title: "Token Ejected", body: "To reset file permissions, you'll have to restart the app. Would you like to exit now?", actionLabel: "Confirm", action: { exitinator() })
@@ -100,16 +100,19 @@ struct SettingsView: View {
                 } header: {
                     HeaderLabel("About", symbol: "info.circle")
                 } footer: {
-                    Text("Made with love by [jailbreak.party](https://jailbreak.party) team.\nNeed support? Join our [Discord server!](https://jailbreak.party/discord)")
+                    VStack(alignment: .leading) {
+                        Link("Made with love by the jailbreak.party team.", destination: URL(string: "https://jailbreak.party")!)
+                        Link("Join our Discord server", destination: URL(string: "https://jailbreak.party/discord")!)
+                    }
                 }
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
-            .noRefreshable()
+
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        dismiss()
+                        onClose()
                     } label: {
                         ToolbarLabel("Close", symbol: "xmark")
                     }
