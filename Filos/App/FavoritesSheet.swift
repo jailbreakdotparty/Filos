@@ -65,20 +65,21 @@ struct FavoritesSheet: View {
                                         Text(fav.label)
                                         Text(fav.path)
                                             .font(.footnote)
-                                            .compatibleForegroundColor(.secondary)
+                                            .foregroundColor(.secondary)
                                     }
                                     Spacer()
                                     Chevron()
                                 }
                             }
-                            .compatibleForegroundColor(Color(.label))
-                            .padding(.vertical, !isSolariumUI() ? 1 : 0)
+                            .foregroundColor(Color(.label))
+                            .padding(.vertical, 1)
                             .contextMenu {
-                                CompatibleButton(role: .destructive) {
+                                Button {
                                     favList.removeAll { $0.id == fav.id }
                                 } label: {
                                     Label("Remove", systemImage: "trash")
                                 }
+                                .foregroundColor(.red)
                             }
                         }
                     } header: {
@@ -102,7 +103,7 @@ struct FavoritesSheet: View {
                     Button {
                         onClose()
                     } label: {
-                        ToolbarLabel("Close", symbol: "xmark")
+                        Text("Close")
                     }
                 }
             }
@@ -130,11 +131,11 @@ struct FavoritesSheet: View {
                             Button {
                                 showAddSheet = false
                             } label: {
-                                ToolbarLabel("Cancel", symbol: "xmark")
+                                Text("Cancel")
                             }
                         }
                         ToolbarItem(placement: .topBarTrailing) {
-                            CompatibleButton(role: .adaptiveConfirm) {
+                            Button {
                                 if label.isEmpty || label.isEmpty || favList.compactMap({ $0.path }).contains(path) {
                                     Alertinator.shared.alert(title: "Invaild Favorite!", body: "Please make sure that you've typed in both the label and path fields, and that the path you put in is not the same as any paths currently added as favorites.")
                                 } else {
@@ -142,7 +143,7 @@ struct FavoritesSheet: View {
                                     showAddSheet = false
                                 }
                             } label: {
-                                ToolbarLabel("Save", symbol: "checkmark")
+                                Text("Save")
                             }
                         }
                     }

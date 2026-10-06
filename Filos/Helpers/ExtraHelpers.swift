@@ -54,13 +54,6 @@ extension Array: RawRepresentable where Element: Codable {
     }
 }
 
-func isSolariumUI() -> Bool {
-    if #available(iOS 26.0, *) {
-        return true
-    }
-    return false
-}
-
 func machineName() -> String {
     var systemInfo = utsname()
     uname(&systemInfo)
@@ -69,23 +62,4 @@ func machineName() -> String {
         guard let value = element.value as? Int8, value != 0 else { return identifier }
         return identifier + String(UnicodeScalar(UInt8(value)))
     }
-}
-
-@available(iOS 15.0, *)
-extension ButtonRole {
-    static var adaptiveConfirm: ButtonRole? {
-        #if compiler(>=6.2)
-        if #available(iOS 26.0, *) {
-            return .confirm
-        }
-        #endif
-        return nil
-    }
-}
-
-let vrs = ProcessInfo.processInfo.operatingSystemVersion
-func doubleSysVrs() -> Double {
-    let pieces = [String(vrs.majorVersion), String(vrs.minorVersion)]
-    let combined = pieces.joined(separator: ".")
-    return Double(combined) ?? 0.0
 }

@@ -27,33 +27,23 @@ struct AppIconCell: View {
     var image: Image
     
     var body: some View {
-        if #available(iOS 26.0, *) {
-            image
-                .resizable()
-                .scaledToFit()
-                .frame(width: 55, height: 55)
-                .background(PlaceholderAppIconCell())
-                .clipShape(.rect(cornerRadius: 16))
-                .compatibleGlassEffect(in: .rect(cornerRadius: 16))
-        } else {
-            image
-                .resizable()
-                .scaledToFit()
-                .frame(width: 55, height: 55)
-                .background(PlaceholderAppIconCell())
-                .clipShape(.rect(cornerRadius: 12))
-                .compatibleOverlay {
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.secondary.opacity(0.2), lineWidth: 1.5)
-                }
-        }
+        image
+            .resizable()
+            .scaledToFit()
+            .frame(width: 55, height: 55)
+            .background(PlaceholderAppIconCell())
+            .clipShape(.rect(cornerRadius: 12))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.secondary.opacity(0.2), lineWidth: 1.5)
+            )
     }
 }
 
 struct PlaceholderAppIconCell: View {
     var body: some View {
         Image(systemName: "questionmark.square")
-            .compatibleForegroundColor(.secondary)
+            .foregroundColor(.secondary)
             .frame(width: 55, height: 55)
             .background(Color(.systemGray5))
     }

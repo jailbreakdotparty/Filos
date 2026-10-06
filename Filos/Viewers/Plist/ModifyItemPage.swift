@@ -73,7 +73,7 @@ struct ModifyItemPage: View {
             }
             
             if isEditing {
-                CompatibleButton("Delete Item", role: .destructive) {
+                Button("Delete Item") {
                     let res = pmgr.writePlistItems(delItem: item)
                     if !res {
                         Alertinator.shared.alert(title: "Failed to delete plist item!", body: Errors.checkLogs)
@@ -81,6 +81,7 @@ struct ModifyItemPage: View {
                         onClose()
                     }
                 }
+                .foregroundColor(.red)
             }
         }
         .navigationTitle("\(item.key)")
@@ -89,10 +90,7 @@ struct ModifyItemPage: View {
         .listStyle(.grouped)
 
         .onAppear {
-            Task {
-                let plistItem = pmgr.plistArray.first(where: { $0.id == item.id }) ?? item
-                ogItem = plistItem
-            }
+            ogItem = pmgr.plistArray.first(where: { $0.id == item.id }) ?? item
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -101,14 +99,14 @@ struct ModifyItemPage: View {
                         item = ogItem
                         isEditing = false
                     } label: {
-                        ToolbarLabel("Cancel", symbol: "xmark")
+                        Text("Cancel")
                     }
                 }
             }
             
             ToolbarItem(placement: .topBarTrailing) {
                 if isEditing {
-                    CompatibleButton(role: .adaptiveConfirm) {
+                    Button {
                         let res = pmgr.writePlistItems(newItem: item)
                         if res {
                             Haptic.shared.play(.soft)
@@ -118,14 +116,14 @@ struct ModifyItemPage: View {
                         }
                         isEditing = false
                     } label: {
-                        ToolbarLabel("Save", symbol: "checkmark")
+                        Text("Save")
                     }
                 } else {
                     if pmgr.isWritable {
                         Button {
                             isEditing = true
                         } label: {
-                            ToolbarLabel("Edit", symbol: "pencil")
+                            Text("Edit")
                         }
                     }
                 }

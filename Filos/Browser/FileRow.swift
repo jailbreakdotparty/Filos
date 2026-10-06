@@ -20,14 +20,6 @@ enum FBPreviewTypes: Equatable {
     case info, plist, text, quickLook
 }
 
-let fileRowSpacing: CGFloat = {
-    if isSolariumUI() {
-        return 12
-    } else {
-        return 10
-    }
-}()
-
 struct FileRow: View {
     @EnvironmentObject var mgr: FilosManager
     @AppStorage("hideDates") var hideDates = false
@@ -39,65 +31,25 @@ struct FileRow: View {
     @State private var conformsPlist = false
     @State private var conformsZip = false
     
-    @ViewBuilder
     var body: some View {
-        if #available(iOS 15.0, *) {
-            row
-        .swipeActions {
-            if mgr.isFavorited(item) {
-                Button {
-                    mgr.removeFavorite(item)
-                } label: {
-                    Label("Unfavorite", systemImage: "star.slash")
-                }
-                .tint(.yellow)
-            } else {
-                Button {
-                    mgr.addFavorite(item)
-                } label: {
-                    Image(systemName: "star")
-                }
-                .tint(.yellow)
-            }
-
-            if item.writable {
-                CompatibleButton(role: .destructive) {
-                    do {
-                        try fm.removeItem(at: item.fileURL)
-                        mgr.refreshFiles.toggle()
-                    } catch {
-                        print("[!] failed to delete file: \(error)")
-                        Alertinator.shared.alert(title: "Failed to delete file!", body: "Check that you can change this folder, then try again.")
-                    }
-                } label: {
-                    Image(systemName: "trash")
-                }
-            }
-        }
-        } else {
-            row
-        }
-    }
-
-    private var row: some View {
         Button {
             fileTapAction()
         } label: {
-            HStack(spacing: fileRowSpacing) {
+            HStack(spacing: 10) {
                 Image(systemName: item.type == .file ? "doc" : "arrow.up.right.circle")
-                    .compatibleForegroundColor(item.hidden ? .secondary : .primary)
+                    .foregroundColor(item.hidden ? .secondary : .primary)
                     .frame(width: 20, alignment: .center)
                 
                 VStack(alignment: .leading) {
                     Text(item.name)
-                        .compatibleForegroundColor(item.hidden ? .secondary : .primary)
+                        .foregroundColor(item.hidden ? .secondary : .primary)
                         .lineLimit(1)
                         .truncationMode(.middle)
                     
                     if !hideDates && !item.modifiedDateStr.isEmpty && item.type == .file {
                         Text(item.modifiedDateStr)
                             .font(.footnote)
-                            .compatibleForegroundColor(.secondary)
+                            .foregroundColor(.secondary)
                             .lineLimit(1)
                     }
                 }
@@ -106,7 +58,7 @@ struct FileRow: View {
                 if item.type == .file {
                     Text("\(ByteCountFormatter.string(fromByteCount: Int64(item.size), countStyle: .file))")
                         .font(.footnote)
-                        .compatibleForegroundColor(.secondary)
+                        .foregroundColor(.secondary)
                 }
                 
                 Button {
@@ -115,7 +67,7 @@ struct FileRow: View {
                     Image(systemName: "info.circle")
                 }
                 .buttonStyle(.plain)
-                .compatibleForegroundColor(Color.accentColor)
+                .foregroundColor(Color.accentColor)
                 .opacity(item.hidden ? 0.8 : 1.0)
                 
                 if item.type == .symlink {
@@ -123,8 +75,8 @@ struct FileRow: View {
                 }
             }
         }
-        .padding(.vertical, !hideDates && !item.modifiedDateStr.isEmpty && item.type == .file && !isSolariumUI() ? 1 : 0)
-        .compatibleForegroundColor(Color(.label))
+        .padding(.vertical, !hideDates && !item.modifiedDateStr.isEmpty && item.type == .file ? 1 : 0)
+        .foregroundColor(Color(.label))
         .onAppear {
             DispatchQueue.global(qos: .userInitiated).async {
                 conformsText = conformsToTextViewer(item.fileURL)
@@ -282,7 +234,7 @@ struct FileRow: View {
             }
             
             if item.writable {
-                CompatibleButton(role: .destructive) {
+                Button {
                     do {
                         try fm.removeItem(at: item.fileURL)
                         mgr.refreshFiles.toggle()
@@ -293,6 +245,7 @@ struct FileRow: View {
                 } label: {
                     Label("Delete", systemImage: "trash")
                 }
+                .foregroundColor(.red)
             }
         }
     }

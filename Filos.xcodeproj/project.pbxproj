@@ -8,87 +8,81 @@
 
 /* Begin PBXBuildFile section */
 		CC48540A300BC5A0007D98D0 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = CC485409300BC5A0007D98D0 /* ZIPFoundation */; };
-		F14800010000000000000000 /* FavoritesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000000 /* FavoritesSheet.swift */; };
-		F14800010000000000000001 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000001 /* LogView.swift */; };
-		F14800010000000000000002 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000002 /* SettingsView.swift */; };
-		F14800010000000000000003 /* FileBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000003 /* FileBrowserView.swift */; };
-		F14800010000000000000004 /* FileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000004 /* FileRow.swift */; };
-		F14800010000000000000005 /* FolderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000005 /* FolderRow.swift */; };
-		F14800010000000000000006 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000006 /* ContentView.swift */; };
-		F14800010000000000000007 /* FilosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000007 /* FilosApp.swift */; };
-		F14800010000000000000008 /* FilosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000008 /* FilosManager.swift */; };
-		F14800010000000000000009 /* Alertinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000009 /* Alertinator.swift */; };
-		F1480001000000000000000A /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000A /* AppInfo.swift */; };
-		F1480001000000000000000B /* Exitinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000B /* Exitinator.swift */; };
-		F1480001000000000000000C /* Hapticinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000C /* Hapticinator.swift */; };
-		F1480001000000000000000D /* Shareinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000D /* Shareinator.swift */; };
-		F1480001000000000000000E /* ExtraHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000E /* ExtraHelpers.swift */; };
-		F1480001000000000000000F /* FileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000F /* FileHelpers.swift */; };
-		F14800010000000000000010 /* FileItemHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000010 /* FileItemHelpers.swift */; };
-		F14800010000000000000011 /* InfoHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000011 /* InfoHelpers.swift */; };
-		F14800010000000000000012 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000012 /* ViewExtensions.swift */; };
-		F14800010000000000000013 /* CompactAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000013 /* CompactAlert.swift */; };
-		F14800010000000000000014 /* PlainAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000014 /* PlainAlert.swift */; };
-		F14800010000000000000015 /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000015 /* ButtonLabel.swift */; };
-		F14800010000000000000016 /* PlainToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000016 /* PlainToggle.swift */; };
-		F14800010000000000000017 /* TextFieldBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000017 /* TextFieldBackground.swift */; };
-		F14800010000000000000018 /* ToolbarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000018 /* ToolbarLabel.swift */; };
-		F14800010000000000000019 /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000019 /* HeaderLabel.swift */; };
-		F1480001000000000000001A /* NavigationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001A /* NavigationLabel.swift */; };
-		F1480001000000000000001B /* SectionPlatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001B /* SectionPlatter.swift */; };
-		F1480001000000000000001C /* TerminalPlatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001C /* TerminalPlatter.swift */; };
-		F1480001000000000000001D /* AppInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001D /* AppInfoCell.swift */; };
-		F1480001000000000000001E /* LinkCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001E /* LinkCreditCell.swift */; };
-		F1480001000000000000001F /* InfoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001F /* InfoViewer.swift */; };
-		F14800010000000000000020 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000020 /* ItemRow.swift */; };
-		F14800010000000000000021 /* ModifyItemPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000021 /* ModifyItemPage.swift */; };
-		F14800010000000000000022 /* PlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000022 /* PlistManager.swift */; };
-		F14800010000000000000023 /* PlistViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000023 /* PlistViewer.swift */; };
-		F14800010000000000000024 /* TextViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000024 /* TextViewer.swift */; };
 		F14800030000000000000000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F14800040000000000000000 /* Assets.xcassets */; };
+		A4657BB261F841129BA47612 /* FavoritesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000000 /* FavoritesSheet.swift */; };
+		1334666E795B6222B1F121B0 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000001 /* LogView.swift */; };
+		726B017AB0C8377AA9E03CB7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000002 /* SettingsView.swift */; };
+		AB9E708F764CC222EF9FE6C5 /* DocumentImportPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDC92DB707D207C5BC95B3E /* DocumentImportPicker.swift */; };
+		8E152B496FE58D837FDEBA27 /* FileBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000003 /* FileBrowserView.swift */; };
+		553678E6706A9084C4CB2DEF /* FileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000004 /* FileRow.swift */; };
+		90A97F9DE8265E9F2B548B8B /* FileSearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0C8E251C7D41E27DAD4CA /* FileSearchField.swift */; };
+		C67BF66BCD8039B89FEACF17 /* FolderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000005 /* FolderRow.swift */; };
+		9FF2EA8E94F5AE97E000DA72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000006 /* ContentView.swift */; };
+		0511DD89775A3C1D29A2B435 /* FilosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000007 /* FilosApp.swift */; };
+		75BAD0253B454FD39D0D6BCB /* FilosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000008 /* FilosManager.swift */; };
+		169AEC901C67F7740D35F1BE /* Alertinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000009 /* Alertinator.swift */; };
+		036995F45FA0EE876F37B0BF /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000A /* AppInfo.swift */; };
+		1A546DDA39ABF7B8BAC4FBCC /* Exitinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000B /* Exitinator.swift */; };
+		AF0F0E6E52E20B41A2D43E88 /* Hapticinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000C /* Hapticinator.swift */; };
+		8472958C4841BF10137D3D1F /* Shareinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000D /* Shareinator.swift */; };
+		7BB6CDDC5DD7BDAB32971E3B /* ExtraHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000E /* ExtraHelpers.swift */; };
+		81AABC1F9B261DEFC61AF125 /* FileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000F /* FileHelpers.swift */; };
+		549EBFA5C50DF2F1C75D61A7 /* FileItemHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000010 /* FileItemHelpers.swift */; };
+		1B3CCB13311CFAC89646C1CE /* InfoHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000011 /* InfoHelpers.swift */; };
+		A5D21AE4E60D9EC02EBDCCBC /* PlainAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000014 /* PlainAlert.swift */; };
+		9FBE9B888AAE2A9D664AEE9C /* ReadOnlyIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1E02117D78EBCAE74C5B57 /* ReadOnlyIndicator.swift */; };
+		BBD53A20636BBF2488346EBB /* SelectableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A8D8373A028BF241223C80 /* SelectableTextView.swift */; };
+		B86564A5B07B752C96E43B90 /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000019 /* HeaderLabel.swift */; };
+		7B4B89C8E80723155DA0A996 /* ListStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000012 /* ListStyle.swift */; };
+		45D1C99C789EED2C5A8E4C67 /* NavigationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001A /* NavigationLabel.swift */; };
+		34857B01DE044FA8D6B4EED4 /* AppInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001D /* AppInfoCell.swift */; };
+		542621968FEE09670C13A33C /* LinkCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001E /* LinkCreditCell.swift */; };
+		AD956361DB8414572361FC2B /* InfoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001F /* InfoViewer.swift */; };
+		2D1E40546F7A32FE64C2E0A2 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000020 /* ItemRow.swift */; };
+		7F016E36BED3BB4BBFAEFFA5 /* ModifyItemPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000021 /* ModifyItemPage.swift */; };
+		F8791A3FCBF7606424DF4580 /* PlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000022 /* PlistManager.swift */; };
+		009973356BEA9C6E0EFD4FD2 /* PlistViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000023 /* PlistViewer.swift */; };
+		A987FAD2501E8FDD8B2BB9A9 /* TextViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000024 /* TextViewer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1531758F30094354008A92CE /* Filos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filos.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F14800020000000000000000 /* FavoritesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/FavoritesSheet.swift"; sourceTree = "<group>"; };
-		F14800020000000000000001 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/LogView.swift"; sourceTree = "<group>"; };
-		F14800020000000000000002 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/SettingsView.swift"; sourceTree = "<group>"; };
-		F14800020000000000000003 /* FileBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser/FileBrowserView.swift"; sourceTree = "<group>"; };
-		F14800020000000000000004 /* FileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser/FileRow.swift"; sourceTree = "<group>"; };
-		F14800020000000000000005 /* FolderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser/FolderRow.swift"; sourceTree = "<group>"; };
+		F14800040000000000000000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F14800040000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F14800020000000000000000 /* FavoritesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesSheet.swift"; sourceTree = "<group>"; };
+		F14800020000000000000001 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogView.swift"; sourceTree = "<group>"; };
+		F14800020000000000000002 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView.swift"; sourceTree = "<group>"; };
+		1BDC92DB707D207C5BC95B3E /* DocumentImportPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentImportPicker.swift"; sourceTree = "<group>"; };
+		F14800020000000000000003 /* FileBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileBrowserView.swift"; sourceTree = "<group>"; };
+		F14800020000000000000004 /* FileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileRow.swift"; sourceTree = "<group>"; };
+		5CD0C8E251C7D41E27DAD4CA /* FileSearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileSearchField.swift"; sourceTree = "<group>"; };
+		F14800020000000000000005 /* FolderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FolderRow.swift"; sourceTree = "<group>"; };
 		F14800020000000000000006 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView.swift"; sourceTree = "<group>"; };
 		F14800020000000000000007 /* FilosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilosApp.swift"; sourceTree = "<group>"; };
 		F14800020000000000000008 /* FilosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilosManager.swift"; sourceTree = "<group>"; };
-		F14800020000000000000009 /* Alertinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/Alertinator.swift"; sourceTree = "<group>"; };
-		F1480002000000000000000A /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/AppInfo.swift"; sourceTree = "<group>"; };
-		F1480002000000000000000B /* Exitinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/Exitinator.swift"; sourceTree = "<group>"; };
-		F1480002000000000000000C /* Hapticinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/Hapticinator.swift"; sourceTree = "<group>"; };
-		F1480002000000000000000D /* Shareinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/Shareinator.swift"; sourceTree = "<group>"; };
-		F1480002000000000000000E /* ExtraHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/ExtraHelpers.swift"; sourceTree = "<group>"; };
-		F1480002000000000000000F /* FileHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/FileHelpers.swift"; sourceTree = "<group>"; };
-		F14800020000000000000010 /* FileItemHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/FileItemHelpers.swift"; sourceTree = "<group>"; };
-		F14800020000000000000011 /* InfoHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/InfoHelpers.swift"; sourceTree = "<group>"; };
-		F14800020000000000000012 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/ViewExtensions.swift"; sourceTree = "<group>"; };
-		F14800020000000000000013 /* CompactAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Alerts/CompactAlert.swift"; sourceTree = "<group>"; };
-		F14800020000000000000014 /* PlainAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Alerts/PlainAlert.swift"; sourceTree = "<group>"; };
-		F14800020000000000000015 /* ButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Interactions/ButtonLabel.swift"; sourceTree = "<group>"; };
-		F14800020000000000000016 /* PlainToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Interactions/PlainToggle.swift"; sourceTree = "<group>"; };
-		F14800020000000000000017 /* TextFieldBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Interactions/TextFieldBackground.swift"; sourceTree = "<group>"; };
-		F14800020000000000000018 /* ToolbarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Interactions/ToolbarLabel.swift"; sourceTree = "<group>"; };
-		F14800020000000000000019 /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Lists/HeaderLabel.swift"; sourceTree = "<group>"; };
-		F1480002000000000000001A /* NavigationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Lists/NavigationLabel.swift"; sourceTree = "<group>"; };
-		F1480002000000000000001B /* SectionPlatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Lists/SectionPlatter.swift"; sourceTree = "<group>"; };
-		F1480002000000000000001C /* TerminalPlatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Lists/TerminalPlatter.swift"; sourceTree = "<group>"; };
-		F1480002000000000000001D /* AppInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Settings/AppInfoCell.swift"; sourceTree = "<group>"; };
-		F1480002000000000000001E /* LinkCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Settings/LinkCreditCell.swift"; sourceTree = "<group>"; };
-		F1480002000000000000001F /* InfoViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/InfoViewer.swift"; sourceTree = "<group>"; };
-		F14800020000000000000020 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/Plist/ItemRow.swift"; sourceTree = "<group>"; };
-		F14800020000000000000021 /* ModifyItemPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/Plist/ModifyItemPage.swift"; sourceTree = "<group>"; };
-		F14800020000000000000022 /* PlistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/Plist/PlistManager.swift"; sourceTree = "<group>"; };
-		F14800020000000000000023 /* PlistViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/Plist/PlistViewer.swift"; sourceTree = "<group>"; };
-		F14800020000000000000024 /* TextViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/TextViewer.swift"; sourceTree = "<group>"; };
-		F14800040000000000000000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = App/Assets.xcassets; sourceTree = "<group>"; };
-		F14800040000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F14800020000000000000009 /* Alertinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alertinator.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000A /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppInfo.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000B /* Exitinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exitinator.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000C /* Hapticinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hapticinator.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000D /* Shareinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shareinator.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000E /* ExtraHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtraHelpers.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000F /* FileHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileHelpers.swift"; sourceTree = "<group>"; };
+		F14800020000000000000010 /* FileItemHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileItemHelpers.swift"; sourceTree = "<group>"; };
+		F14800020000000000000011 /* InfoHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InfoHelpers.swift"; sourceTree = "<group>"; };
+		F14800020000000000000014 /* PlainAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlainAlert.swift"; sourceTree = "<group>"; };
+		0F1E02117D78EBCAE74C5B57 /* ReadOnlyIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReadOnlyIndicator.swift"; sourceTree = "<group>"; };
+		D7A8D8373A028BF241223C80 /* SelectableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectableTextView.swift"; sourceTree = "<group>"; };
+		F14800020000000000000019 /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeaderLabel.swift"; sourceTree = "<group>"; };
+		F14800020000000000000012 /* ListStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListStyle.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001A /* NavigationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationLabel.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001D /* AppInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppInfoCell.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001E /* LinkCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LinkCreditCell.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001F /* InfoViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InfoViewer.swift"; sourceTree = "<group>"; };
+		F14800020000000000000020 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemRow.swift"; sourceTree = "<group>"; };
+		F14800020000000000000021 /* ModifyItemPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModifyItemPage.swift"; sourceTree = "<group>"; };
+		F14800020000000000000022 /* PlistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlistManager.swift"; sourceTree = "<group>"; };
+		F14800020000000000000023 /* PlistViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlistViewer.swift"; sourceTree = "<group>"; };
+		F14800020000000000000024 /* TextViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextViewer.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,47 +100,132 @@
 		1531759130094354008A92CE /* Filos */ = {
 			isa = PBXGroup;
 			children = (
-				F14800020000000000000000 /* FavoritesSheet.swift */,
-				F14800020000000000000001 /* LogView.swift */,
-				F14800020000000000000002 /* SettingsView.swift */,
-				F14800020000000000000003 /* FileBrowserView.swift */,
-				F14800020000000000000004 /* FileRow.swift */,
-				F14800020000000000000005 /* FolderRow.swift */,
+				13C4608B5138EBE9B3A45A55 /* App */,
+				ACAC4F42BA5BEE7E8D8CC57A /* Browser */,
 				F14800020000000000000006 /* ContentView.swift */,
 				F14800020000000000000007 /* FilosApp.swift */,
 				F14800020000000000000008 /* FilosManager.swift */,
+				9152B07614EB5B7CCBC96F96 /* Helpers */,
+				F14800040000000000000001 /* Info.plist */,
+				6BCFDF74E09E3385B1DD91B6 /* UI */,
+				0AC1558227292516EF685868 /* Viewers */,
+			);
+			path = Filos;
+			sourceTree = "<group>";
+		};
+		13C4608B5138EBE9B3A45A55 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F14800040000000000000000 /* Assets.xcassets */,
+				F14800020000000000000000 /* FavoritesSheet.swift */,
+				F14800020000000000000001 /* LogView.swift */,
+				F14800020000000000000002 /* SettingsView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ACAC4F42BA5BEE7E8D8CC57A /* Browser */ = {
+			isa = PBXGroup;
+			children = (
+				1BDC92DB707D207C5BC95B3E /* DocumentImportPicker.swift */,
+				F14800020000000000000003 /* FileBrowserView.swift */,
+				F14800020000000000000004 /* FileRow.swift */,
+				5CD0C8E251C7D41E27DAD4CA /* FileSearchField.swift */,
+				F14800020000000000000005 /* FolderRow.swift */,
+			);
+			path = Browser;
+			sourceTree = "<group>";
+		};
+		9152B07614EB5B7CCBC96F96 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				548126BAA07285A8B79F2D04 /* App */,
+				F1480002000000000000000E /* ExtraHelpers.swift */,
+				F1480002000000000000000F /* FileHelpers.swift */,
+				F14800020000000000000010 /* FileItemHelpers.swift */,
+				F14800020000000000000011 /* InfoHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		548126BAA07285A8B79F2D04 /* App */ = {
+			isa = PBXGroup;
+			children = (
 				F14800020000000000000009 /* Alertinator.swift */,
 				F1480002000000000000000A /* AppInfo.swift */,
 				F1480002000000000000000B /* Exitinator.swift */,
 				F1480002000000000000000C /* Hapticinator.swift */,
 				F1480002000000000000000D /* Shareinator.swift */,
-				F1480002000000000000000E /* ExtraHelpers.swift */,
-				F1480002000000000000000F /* FileHelpers.swift */,
-				F14800020000000000000010 /* FileItemHelpers.swift */,
-				F14800020000000000000011 /* InfoHelpers.swift */,
-				F14800020000000000000012 /* ViewExtensions.swift */,
-				F14800020000000000000013 /* CompactAlert.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6BCFDF74E09E3385B1DD91B6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				23928DEEB8C178E184B0562E /* Alerts */,
+				84E98E85C47C481B29846DD3 /* Interactions */,
+				B3D38194AC77B297F089CA37 /* Lists */,
+				BF703552327A2C00902E253C /* Settings */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		23928DEEB8C178E184B0562E /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
 				F14800020000000000000014 /* PlainAlert.swift */,
-				F14800020000000000000015 /* ButtonLabel.swift */,
-				F14800020000000000000016 /* PlainToggle.swift */,
-				F14800020000000000000017 /* TextFieldBackground.swift */,
-				F14800020000000000000018 /* ToolbarLabel.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		84E98E85C47C481B29846DD3 /* Interactions */ = {
+			isa = PBXGroup;
+			children = (
+				0F1E02117D78EBCAE74C5B57 /* ReadOnlyIndicator.swift */,
+				D7A8D8373A028BF241223C80 /* SelectableTextView.swift */,
+			);
+			path = Interactions;
+			sourceTree = "<group>";
+		};
+		B3D38194AC77B297F089CA37 /* Lists */ = {
+			isa = PBXGroup;
+			children = (
 				F14800020000000000000019 /* HeaderLabel.swift */,
+				F14800020000000000000012 /* ListStyle.swift */,
 				F1480002000000000000001A /* NavigationLabel.swift */,
-				F1480002000000000000001B /* SectionPlatter.swift */,
-				F1480002000000000000001C /* TerminalPlatter.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
+		BF703552327A2C00902E253C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
 				F1480002000000000000001D /* AppInfoCell.swift */,
 				F1480002000000000000001E /* LinkCreditCell.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0AC1558227292516EF685868 /* Viewers */ = {
+			isa = PBXGroup;
+			children = (
 				F1480002000000000000001F /* InfoViewer.swift */,
+				C8BB5507779F24A91A54CBF8 /* Plist */,
+				F14800020000000000000024 /* TextViewer.swift */,
+			);
+			path = Viewers;
+			sourceTree = "<group>";
+		};
+		C8BB5507779F24A91A54CBF8 /* Plist */ = {
+			isa = PBXGroup;
+			children = (
 				F14800020000000000000020 /* ItemRow.swift */,
 				F14800020000000000000021 /* ModifyItemPage.swift */,
 				F14800020000000000000022 /* PlistManager.swift */,
 				F14800020000000000000023 /* PlistViewer.swift */,
-				F14800020000000000000024 /* TextViewer.swift */,
-				F14800040000000000000000 /* Assets.xcassets */,
-				F14800040000000000000001 /* Info.plist */,
 			);
-			path = Filos;
+			path = Plist;
 			sourceTree = "<group>";
 		};
 
@@ -241,43 +320,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F14800010000000000000000 /* FavoritesSheet.swift in Sources */,
-				F14800010000000000000001 /* LogView.swift in Sources */,
-				F14800010000000000000002 /* SettingsView.swift in Sources */,
-				F14800010000000000000003 /* FileBrowserView.swift in Sources */,
-				F14800010000000000000004 /* FileRow.swift in Sources */,
-				F14800010000000000000005 /* FolderRow.swift in Sources */,
-				F14800010000000000000006 /* ContentView.swift in Sources */,
-				F14800010000000000000007 /* FilosApp.swift in Sources */,
-				F14800010000000000000008 /* FilosManager.swift in Sources */,
-				F14800010000000000000009 /* Alertinator.swift in Sources */,
-				F1480001000000000000000A /* AppInfo.swift in Sources */,
-				F1480001000000000000000B /* Exitinator.swift in Sources */,
-				F1480001000000000000000C /* Hapticinator.swift in Sources */,
-				F1480001000000000000000D /* Shareinator.swift in Sources */,
-				F1480001000000000000000E /* ExtraHelpers.swift in Sources */,
-				F1480001000000000000000F /* FileHelpers.swift in Sources */,
-				F14800010000000000000010 /* FileItemHelpers.swift in Sources */,
-				F14800010000000000000011 /* InfoHelpers.swift in Sources */,
-				F14800010000000000000012 /* ViewExtensions.swift in Sources */,
-				F14800010000000000000013 /* CompactAlert.swift in Sources */,
-				F14800010000000000000014 /* PlainAlert.swift in Sources */,
-				F14800010000000000000015 /* ButtonLabel.swift in Sources */,
-				F14800010000000000000016 /* PlainToggle.swift in Sources */,
-				F14800010000000000000017 /* TextFieldBackground.swift in Sources */,
-				F14800010000000000000018 /* ToolbarLabel.swift in Sources */,
-				F14800010000000000000019 /* HeaderLabel.swift in Sources */,
-				F1480001000000000000001A /* NavigationLabel.swift in Sources */,
-				F1480001000000000000001B /* SectionPlatter.swift in Sources */,
-				F1480001000000000000001C /* TerminalPlatter.swift in Sources */,
-				F1480001000000000000001D /* AppInfoCell.swift in Sources */,
-				F1480001000000000000001E /* LinkCreditCell.swift in Sources */,
-				F1480001000000000000001F /* InfoViewer.swift in Sources */,
-				F14800010000000000000020 /* ItemRow.swift in Sources */,
-				F14800010000000000000021 /* ModifyItemPage.swift in Sources */,
-				F14800010000000000000022 /* PlistManager.swift in Sources */,
-				F14800010000000000000023 /* PlistViewer.swift in Sources */,
-				F14800010000000000000024 /* TextViewer.swift in Sources */,
+				A4657BB261F841129BA47612 /* FavoritesSheet.swift in Sources */,
+				1334666E795B6222B1F121B0 /* LogView.swift in Sources */,
+				726B017AB0C8377AA9E03CB7 /* SettingsView.swift in Sources */,
+				AB9E708F764CC222EF9FE6C5 /* DocumentImportPicker.swift in Sources */,
+				8E152B496FE58D837FDEBA27 /* FileBrowserView.swift in Sources */,
+				553678E6706A9084C4CB2DEF /* FileRow.swift in Sources */,
+				90A97F9DE8265E9F2B548B8B /* FileSearchField.swift in Sources */,
+				C67BF66BCD8039B89FEACF17 /* FolderRow.swift in Sources */,
+				9FF2EA8E94F5AE97E000DA72 /* ContentView.swift in Sources */,
+				0511DD89775A3C1D29A2B435 /* FilosApp.swift in Sources */,
+				75BAD0253B454FD39D0D6BCB /* FilosManager.swift in Sources */,
+				169AEC901C67F7740D35F1BE /* Alertinator.swift in Sources */,
+				036995F45FA0EE876F37B0BF /* AppInfo.swift in Sources */,
+				1A546DDA39ABF7B8BAC4FBCC /* Exitinator.swift in Sources */,
+				AF0F0E6E52E20B41A2D43E88 /* Hapticinator.swift in Sources */,
+				8472958C4841BF10137D3D1F /* Shareinator.swift in Sources */,
+				7BB6CDDC5DD7BDAB32971E3B /* ExtraHelpers.swift in Sources */,
+				81AABC1F9B261DEFC61AF125 /* FileHelpers.swift in Sources */,
+				549EBFA5C50DF2F1C75D61A7 /* FileItemHelpers.swift in Sources */,
+				1B3CCB13311CFAC89646C1CE /* InfoHelpers.swift in Sources */,
+				A5D21AE4E60D9EC02EBDCCBC /* PlainAlert.swift in Sources */,
+				9FBE9B888AAE2A9D664AEE9C /* ReadOnlyIndicator.swift in Sources */,
+				BBD53A20636BBF2488346EBB /* SelectableTextView.swift in Sources */,
+				B86564A5B07B752C96E43B90 /* HeaderLabel.swift in Sources */,
+				7B4B89C8E80723155DA0A996 /* ListStyle.swift in Sources */,
+				45D1C99C789EED2C5A8E4C67 /* NavigationLabel.swift in Sources */,
+				34857B01DE044FA8D6B4EED4 /* AppInfoCell.swift in Sources */,
+				542621968FEE09670C13A33C /* LinkCreditCell.swift in Sources */,
+				AD956361DB8414572361FC2B /* InfoViewer.swift in Sources */,
+				2D1E40546F7A32FE64C2E0A2 /* ItemRow.swift in Sources */,
+				7F016E36BED3BB4BBFAEFFA5 /* ModifyItemPage.swift in Sources */,
+				F8791A3FCBF7606424DF4580 /* PlistManager.swift in Sources */,
+				009973356BEA9C6E0EFD4FD2 /* PlistViewer.swift in Sources */,
+				A987FAD2501E8FDD8B2BB9A9 /* TextViewer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,8 +504,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.8;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 0.1;
+
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jbdotparty.filos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -437,13 +513,12 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				XROS_DEPLOYMENT_TARGET = 26.2;
+
 			};
 			name = Debug;
 		};
@@ -475,8 +550,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.8;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 0.1;
+
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jbdotparty.filos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -484,13 +559,12 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				XROS_DEPLOYMENT_TARGET = 26.2;
+
 			};
 			name = Release;
 		};

@@ -54,7 +54,7 @@ struct InfoViewer: View {
             }
             .navigationTitle("\(file.type.rawValue.capitalized) Info")
             .navigationBarTitleDisplayMode(.inline)
-            .adaptiveListMargin()
+
 
             .listStyle(.insetGrouped)
             .toolbar {
@@ -62,7 +62,7 @@ struct InfoViewer: View {
                     Button {
                         onClose()
                     } label: {
-                        ToolbarLabel("Close", symbol: "xmark")
+                        Text("Close")
                     }
                 }
             }
@@ -84,7 +84,7 @@ struct InfoViewer: View {
                 Text(label)
                 Spacer()
                 Text(string)
-                    .compatibleForegroundColor(.secondary)
+                    .foregroundColor(.secondary)
             }
             .contextMenu {
                 Button {
@@ -110,7 +110,7 @@ struct InfoViewer: View {
                 Text(label)
                 Spacer()
                 Image(systemName: bool ? "checkmark" : "xmark")
-                    .compatibleForegroundColor(.secondary)
+                    .foregroundColor(.secondary)
             }
         }
     }

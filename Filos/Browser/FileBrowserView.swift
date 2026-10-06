@@ -74,22 +74,22 @@ struct FileBrowserView: View {
                     ProgressView()
                         .scaleEffect(1.25)
                     Text("Loading Files...")
-                        .compatibleForegroundColor(.secondary)
+                        .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity)
             } else if currentState == .loaded {
-                List {
-                    ForEach(dirFiles) { file in
-                        if file.type == .folder {
-                            FolderRow(item: file, parent: item, previewer: $receivedPreviewer)
-                        } else {
-                            FileRow(item: file, parent: item, previewer: $receivedPreviewer)
+                VStack(spacing: 0) {
+                    FileSearchField(text: $searchText)
+                        .fixedSize(horizontal: false, vertical: true)
+                    List {
+                        ForEach(dirFiles) { file in
+                            if file.type == .folder {
+                                FolderRow(item: file, parent: item, previewer: $receivedPreviewer)
+                            } else {
+                                FileRow(item: file, parent: item, previewer: $receivedPreviewer)
+                            }
                         }
                     }
-                }
-                .compatibleSearchable(text: $searchText)
-                .compatibleRefreshable {
-                    await MainActor.run { mgr.refreshFiles.toggle() }
                 }
             } else {
                 VStack(spacing: 8) {
@@ -102,7 +102,7 @@ struct FileBrowserView: View {
                             Text("Failed to load files from path!")
                             Text(currentState == .unknownError ? "This folder couldn’t be opened. Try again." : currentState.description)
                                 .multilineTextAlignment(.center)
-                                .compatibleForegroundColor(.secondary)
+                                .foregroundColor(.secondary)
                                 .font(.footnote)
                         }
                     }
@@ -113,7 +113,7 @@ struct FileBrowserView: View {
         .navigationTitle(item.fileURL.lastPathComponent)
         .navigationBarTitleDisplayMode(.inline)
         .customListStyle(listStyle)
-        .adaptiveListMargin()
+
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
@@ -151,14 +151,13 @@ struct FileBrowserView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
-                    if #unavailable(iOS 15.0) {
-                        Button {
-                            mgr.refreshFiles.toggle()
-                        } label: {
-                            Label("Refresh", systemImage: "arrow.clockwise")
-                        }
-                        Divider()
+                    Button {
+                        mgr.refreshFiles.toggle()
+                    } label: {
+                        Label("Refresh", systemImage: "arrow.clockwise")
                     }
+                    Divider()
+
                     if item.writable {
                         Menu {
                             Button {

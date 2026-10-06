@@ -14,30 +14,7 @@ struct LogView: View {
     
     var body: some View {
         NavigationView {
-            Group {
-                if #available(iOS 15.0, *) {
-                    ScrollViewReader { proxy in
-                    ScrollView {
-                        Text(mgr.logOutput)
-                            .font(.system(size: 11, design: .monospaced))
-                            .multilineTextAlignment(.leading)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .textSelection(.enabled)
-                            .padding(5)
-                        Spacer()
-                            .id(0)
-                    }
-                    .onAppear {
-                        proxy.scrollTo(0)
-                    }
-                    .onChange(of: mgr.logOutput) { _ in
-                        proxy.scrollTo(0)
-                    }
-                    }
-                } else {
-                    SelectableTextView(text: mgr.logOutput, size: 11, followOutput: true)
-                }
-            }
+            SelectableTextView(text: mgr.logOutput, size: 11, followOutput: true)
             .navigationTitle("Logs")
             .navigationBarTitleDisplayMode(.inline)
 
@@ -79,7 +56,7 @@ struct LogView: View {
                     Button {
                         onClose()
                     } label: {
-                        ToolbarLabel("Close", symbol: "xmark")
+                        Text("Close")
                     }
                 }
             }

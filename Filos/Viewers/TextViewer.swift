@@ -29,42 +29,23 @@ struct TextViewer: View {
     
     var body: some View {
         NavigationView {
-            Group {
-                if isEditing {
-                    TextEditor(text: $editText)
-                        .font(.system(size: CGFloat(textViewerSize), design: useMonospaced ? .monospaced : .default))
-                } else if #available(iOS 15.0, *) {
-                    ScrollView {
-                        Text(fileText)
+            VStack(spacing: 0) {
+                Group {
+                    if isEditing {
+                        TextEditor(text: $editText)
                             .font(.system(size: CGFloat(textViewerSize), design: useMonospaced ? .monospaced : .default))
-                            .padding(5)
-                            .textSelection(.enabled)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    } else {
+                        SelectableTextView(text: fileText, size: CGFloat(textViewerSize), monospaced: useMonospaced)
                     }
-                } else {
-                    SelectableTextView(text: fileText, size: CGFloat(textViewerSize), monospaced: useMonospaced)
+                }
+
+                if !file.writable {
+                    ReadOnlyIndicator()
                 }
             }
             .navigationTitle(fileURL.deletingPathExtension().lastPathComponent)
             .navigationBarTitleDisplayMode(.inline)
             .listStyle(.insetGrouped)
-
-            .compatibleBottomInset() {
-                if !file.writable {
-                    HStack {
-                        Spacer()
-                        Button {
-                            Alertinator.shared.alert(title: "View-Only File", body: "You can only read this file.")
-                        } label: {
-                            Image(systemName: "lock")
-                                .padding(10)
-                        }
-                        .compatibleForegroundColor(.accentColor)
-                        .padding(.trailing)
-                        .ignoresSafeArea()
-                    }
-                }
-            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     if isEditing {
@@ -72,7 +53,7 @@ struct TextViewer: View {
                             isEditing = false
                             editText = fileText
                         } label: {
-                            ToolbarLabel("Cancel", symbol: "xmark")
+                            Text("Cancel")
                         }
                     }
                     
@@ -107,21 +88,21 @@ struct TextViewer: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     if isEditing {
-                        CompatibleButton(role: .adaptiveConfirm) {
+                        Button {
                             let res = writeTextIntoFile(fileURL, string: editText)
                             if res {
                                 isEditing = false
                                 fileText = getFileText(fileURL)
                             }
                         } label: {
-                            ToolbarLabel("Save", symbol: "checkmark")
+                            Text("Save")
                         }
                     } else {
                         Button {
                             onClose()
                             mgr.refreshFiles.toggle()
                         } label: {
-                            ToolbarLabel("Close", symbol: "xmark")
+                            Text("Close")
                         }
                     }
                 }

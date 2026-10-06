@@ -29,23 +29,23 @@ struct FolderRow: View {
                             .frame(width: 20, alignment: .center)
                         VStack(alignment: .leading) {
                             Text(getNameFromInfP(item.fileURL) ?? getBIDFromMCM(item.fileURL) ?? item.name)
-                                .compatibleForegroundColor(item.hidden ? .secondary : .primary)
+                                .foregroundColor(item.hidden ? .secondary : .primary)
                                 .lineLimit(1)
                                 .truncationMode(.middle)
                             Text(item.fileURL.lastPathComponent)
                                 .font(.footnote)
-                                .compatibleForegroundColor(.secondary)
+                                .foregroundColor(.secondary)
                                 .lineLimit(1)
                                 .truncationMode(.middle)
                         }
                     } else {
                         Image(systemName: "folder")
                             .frame(width: 20, alignment: .center)
-                            .compatibleForegroundColor(item.hidden ? .secondary : .primary)
+                            .foregroundColor(item.hidden ? .secondary : .primary)
                         Text(item.name)
                             .lineLimit(1)
                             .truncationMode(.middle)
-                            .compatibleForegroundColor(item.hidden ? .secondary : .primary)
+                            .foregroundColor(item.hidden ? .secondary : .primary)
                     }
                 }
                 
@@ -57,13 +57,13 @@ struct FolderRow: View {
                     Image(systemName: "info.circle")
                 }
                 .buttonStyle(.plain)
-                .compatibleForegroundColor(Color.accentColor)
+                .foregroundColor(Color.accentColor)
                 .opacity(item.hidden ? 0.8 : 1.0)
                 
                 Chevron()
             }
         }
-        .compatibleForegroundColor(Color(.label))
+        .foregroundColor(Color(.label))
         .contextMenu {
             if item.readable {
                 Button {
@@ -174,12 +174,13 @@ struct FolderRow: View {
             }
             
             if item.writable {
-                CompatibleButton(role: .destructive) {
+                Button {
                     try? fm.removeItem(at: item.fileURL)
                     mgr.refreshFiles.toggle()
                 } label: {
                     Label("Delete", systemImage: "trash")
                 }
+                .foregroundColor(.red)
             }
         }
     }

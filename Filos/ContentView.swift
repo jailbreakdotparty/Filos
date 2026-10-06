@@ -27,7 +27,7 @@ struct FileBrowserContainer: View {
     var body: some View {
         FileBrowserView(item: getFileItem(at: url))
             .environmentObject(mgr)
-            .compatibleBackground {
+            .background(
                 NavigationLink(
                     destination: destView,
                     isActive: Binding(get: {
@@ -40,7 +40,7 @@ struct FileBrowserContainer: View {
                 ) {
                     EmptyView()
                 }
-            }
+            )
     }
     
     private var destView: some View {
@@ -57,8 +57,4 @@ struct FileBrowserContainer: View {
             }
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

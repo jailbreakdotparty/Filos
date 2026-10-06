@@ -23,36 +23,25 @@ struct PlistViewer: View {
     
     var body: some View {
         NavigationView {
-            List {
-                if showErrorView {
-                    PlainAlert(title: "Failed to load plist!", symbol: "exclamationmark.triangle.fill", text: Errors.checkLogs, color: .yellow)
-                } else {
-                    ForEach($pmgr.plistArray) { $item in
-                        ItemRow(item: $item, hierarchy: 0)
-                            .environmentObject(pmgr)
+            VStack(spacing: 0) {
+                List {
+                    if showErrorView {
+                        PlainAlert(title: "Failed to load plist!", symbol: "exclamationmark.triangle.fill", text: Errors.checkLogs, color: .yellow)
+                    } else {
+                        ForEach($pmgr.plistArray) { $item in
+                            ItemRow(item: $item, hierarchy: 0)
+                                .environmentObject(pmgr)
+                        }
                     }
+                }
+
+                if !pmgr.isWritable {
+                    ReadOnlyIndicator()
                 }
             }
             .navigationTitle(file.fileURL.lastPathComponent)
             .navigationBarTitleDisplayMode(.inline)
             .listStyle(.inset)
-
-            .compatibleBottomInset() {
-                if !pmgr.isWritable {
-                    HStack {
-                        Spacer()
-                        Button {
-                            Alertinator.shared.alert(title: "View-Only File", body: "You can only read this file.")
-                        } label: {
-                            Image(systemName: "lock")
-                                .padding(10)
-                        }
-                        .compatibleForegroundColor(.accentColor)
-                        .padding(.trailing)
-                        .ignoresSafeArea()
-                    }
-                }
-            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -69,7 +58,7 @@ struct PlistViewer: View {
                     Button {
                         onClose()
                     } label: {
-                        ToolbarLabel("Close", symbol: "xmark")
+                        Text("Close")
                     }
                 }
             }

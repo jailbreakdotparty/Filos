@@ -15,35 +15,34 @@
 - **Filos does NOT use any exploits or sandbox escapes.** If you're thinking that this project will give you full r/w on iOS 27.x, think again. This file manager has been designed with developers and jailbreakers in mind.
 - Since Filos relies on entitlements in order to function, it will be inherently more limited on jailbroken devices than any file manager with a root helper would. I may look into adding one in the future, but no promises.
 
-## Building & Tinkering
+## Building
 
-This fork can be built with Xcode 15.4 and the iOS 17.5 SDK. The deployment target is iOS 14.8. GitHub Actions builds Release and Debug configurations without signing, then packages the Release app as an IPA.
+This fork is maintained for **iOS 14.8 on a rootful jailbreak**, including iPhone 11. It uses one iOS 14 implementation, without branches for newer iOS controls or styling.
 
-### Build on GitHub Actions
+GitHub Actions builds Release and Debug with Xcode 15.4, checks the app's minimum iOS version, icon, and bundled Swift runtime, and packages the Release app as a signed rootful `.deb`.
 
-1. Push changes to your fork. **Build iOS** runs on pushes and pull requests.
-2. Open **Actions**, choose **Build iOS**, then open the successful run.
-3. Download the **Filos-unsigned** artifact and extract `Filos-unsigned.ipa` from the downloaded ZIP.
-4. Sign/install the IPA with your chosen installation tool. This artifact is unsigned and does not have the privileged entitlements from `entitlements.plist`; ordinary sideloading retains iOS sandbox restrictions.
+1. Push changes to the fork and open **Actions > Build iOS**.
+2. Open the successful run and download **Filos-rootful**.
+3. Extract the `.deb` from the downloaded ZIP and transfer it to your phone.
+4. Install it with your jailbreak's package installer while jailbroken.
 
-Manual runs become available after the workflow file is on the default branch. See GitHub's documentation for [manual runs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow) and [downloading artifacts](https://docs.github.com/en/actions/how-tos/writing-workflows/choosing-what-your-workflow-does/storing-and-sharing-data-from-a-workflow).
+The package installs to `/Applications/Filos.app`, declares `Architecture: iphoneos-arm`, and depends on iOS 14.8 or later and `uikittools`. Signing uses the existing `entitlements.plist`. The rootful architecture convention is documented by [Theos](https://theos.dev/docs/packaging); signing options are documented by [Procursus ldid](https://github.com/ProcursusTeam/ldid/blob/master/docs/ldid.1).
 
-The workflow pins `macos-14` and `/Applications/Xcode_15.4.app`, verified against GitHub's [runner inventory](https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md) and Apple's [Xcode support table](https://developer.apple.com/support/xcode/). **GitHub retires this runner on November 2, 2026**, with temporary outages beforehand. A replacement toolchain must be verified for iOS 14 support before changing the runner. See the [official retirement announcement](https://github.com/actions/runner-images/issues/13518).
+For local macOS builds, install `ldid` and `dpkg`, then run `bash debbuild.sh`. To package an already-built app, run `bash debbuild.sh /path/to/Filos.app`. Packages are written to `build/packages`.
 
-### iOS 14.8 compatibility
+The workflow pins `macos-14` and Xcode 15.4, verified against GitHub's [runner inventory](https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md) and Apple's [Xcode support table](https://developer.apple.com/support/xcode/). **GitHub retires this runner on November 2, 2026**, with temporary outages beforehand. Verify iOS 14 support before choosing a replacement. [Official retirement announcement](https://github.com/actions/runner-images/issues/13518)
 
-- Search uses Apple's `UISearchBar` on iOS 14 and SwiftUI search on iOS 15 and later.
-- Choose **Refresh** in the **Actions** menu on iOS 14. Newer versions retain pull-to-refresh.
-- Long-press a file for actions such as favorite and delete on iOS 14. Swipe actions remain on iOS 15 and later.
-- Text and logs remain selectable using `UITextView` on iOS 14.
-- Import uses Apple's iOS 14 document-picker initializer with `asCopy: true`, replacing the global initializer swizzle.
-- Newer styling APIs are checked for availability. iOS 26 glass effects additionally require a build with the iOS 26 SDK; the Xcode 15.4 build uses the compatible appearance.
+## Source structure
 
-The compatibility adapters are in `Filos/Helpers/ViewExtensions.swift`. API availability was checked against Apple's official documentation and Xcode 15.4's SDK declarations. Key references: [document picker](https://developer.apple.com/documentation/uikit/uidocumentpickerviewcontroller/init(foropeningcontenttypes:ascopy:)), [UIKit integration](https://developer.apple.com/documentation/swiftui/uiviewrepresentable), [search](https://developer.apple.com/documentation/uikit/uisearchbar), [selectable text](https://developer.apple.com/documentation/uikit/uitextview/isselectable), and [Swift concurrency back deployment](https://developer.apple.com/documentation/xcode-release-notes/xcode-13_2-release-notes).
+- `App`: settings, favorites, and logs.
+- `Browser`: folder/file browsing, search, and document import.
+- `Viewers`: file information, text, and property-list editing.
+- `UI`: shared display components, selectable text, and list styling.
+- `Helpers`: file operations and application services.
 
-CI checks the packaged app's declared and executable minimum iOS versions, embedded Swift concurrency runtime, and iPhone icon. A successful build does not establish that the app has been tested on a physical iOS 14.8 device. Device validation should cover launch, folder navigation, search, refresh, importing/cancelling, closing viewers, selecting text, and saving/deleting plist entries in a writable folder.
+Search uses `UISearchBar`; text and logs use a selectable `UITextView`; import uses `UIDocumentPickerViewController(forOpeningContentTypes:asCopy:)`. These are documented Apple APIs supported on iOS 14.8. [Search](https://developer.apple.com/documentation/uikit/uisearchbar), [selectable text](https://developer.apple.com/documentation/uikit/uitextview/isselectable), [document picker](https://developer.apple.com/documentation/uikit/uidocumentpickerviewcontroller/init(foropeningcontenttypes:ascopy:))
 
-For local macOS builds, `ipabuild.sh` builds an IPA (`--debug` for Debug, `--ts` for the existing TrollStore signing route with `ldid`). `debbuild.sh` still packages for a rootless jailbreak under `/var/jb`, with its existing iOS 15 minimum. The `.deb` packaging has not been adapted for an iOS 14 jailbreak; use the IPA workflow for this backport.
+Choose **Refresh** in the **Actions** menu to reload a folder. Long-press files to access their actions. The original iOS 14.8 package was confirmed working on the user's phone; updated builds still need a device check after changes.
 
 ## Credits
 - [lunginspector](https://github.com/lunginspector): Primary developer and maintainer.

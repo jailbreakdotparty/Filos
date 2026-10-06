@@ -37,12 +37,12 @@ struct ItemRow: View {
                         Text(item.type.label)
                     }
                     Image(systemName: "info.circle")
-                        .compatibleOverlay {
+                        .overlay(
                             PlistEditorLink(item: $item) {
                                 EmptyView()
                             }
                             .opacity(0)
-                        }
+                        )
                 }
                 .listRowBackground(Color(.hierarchyLevelColor(hierarchy)))
                 // dictionary inception time
@@ -52,15 +52,15 @@ struct ItemRow: View {
                             .font(.system(size: 12, design: .monospaced))
                             .lineLimit(12)
                             .listRowBackground(Color(.hierarchyLevelColor(hierarchy + 1)))
-                            .compatibleOverlay {
+                            .overlay(
                                 PlistEditorLink(item: $item) {
                                     EmptyView()
                                 }
                                 .opacity(0)
-                            }
+                            )
                     } else {
                         ForEach($item.dictVal) { $item in
-                            ItemRow(item: $item, hierarchy: hierarchy + 1).environmentObject(pmgr)
+                            ItemRow(item: $item, hierarchy: hierarchy + 1)
                                 .environmentObject(pmgr)
                         }
                     }
@@ -73,7 +73,7 @@ struct ItemRow: View {
                         Spacer()
                         Text(item.stringVal)
                             .lineLimit(1)
-                            .compatibleForegroundColor(.secondary)
+                            .foregroundColor(.secondary)
                     }
                 }
                 .listRowBackground(Color(.hierarchyLevelColor(hierarchy)))
@@ -95,31 +95,16 @@ struct ItemRow: View {
     }
 }
 
-// Dismissal uses the parent link on iOS 14 and the supported environment action on iOS 15+.
 private struct PlistEditorLink<Label: View>: View {
     @Binding var item: PlistItem
     @State private var isPresented = false
     @ViewBuilder var label: () -> Label
 
     var body: some View {
-        if #available(iOS 15.0, *) {
-            NavigationLink(destination: DismissiblePlistEditor(item: $item), label: label)
-        } else {
-            NavigationLink(isActive: $isPresented) {
-                ModifyItemPage(item: $item, onClose: { isPresented = false })
-            } label: {
-                label()
-            }
+        NavigationLink(isActive: $isPresented) {
+            ModifyItemPage(item: $item, onClose: { isPresented = false })
+        } label: {
+            label()
         }
-    }
-}
-
-@available(iOS 15.0, *)
-private struct DismissiblePlistEditor: View {
-    @Binding var item: PlistItem
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        ModifyItemPage(item: $item, onClose: { dismiss() })
     }
 }

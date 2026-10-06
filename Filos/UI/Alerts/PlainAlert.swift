@@ -17,7 +17,7 @@ struct PlainAlert: View {
         HStack(spacing: 10) {
             if !symbol.isEmpty {
                 Image(systemName: symbol)
-                    .compatibleForegroundColor(color)
+                    .foregroundColor(color)
                     .imageScale(.large)
             }
             VStack(alignment: .leading) {

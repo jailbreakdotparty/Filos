@@ -52,7 +52,7 @@ struct FilosApp: App {
                         }
                     }
                     
-                    print("[*] Filos v0.1 (Release)")
+                    print("[*] Filos v\(AppInfo.appVersion) (\(weOnADebugBuild ? "Debug" : "Release"))")
                     print("[*] Running on \(UIDevice.current.systemName) \(UIDevice.current.systemVersion), \(machineName())")
                     
                     if consumeOnLaunch && !sbxToken.isEmpty {

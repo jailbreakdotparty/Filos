@@ -23,6 +23,22 @@ jobs:
           xcodebuild -version
           xcrun --sdk iphoneos --show-sdk-version
 
+      - name: Install packaging tools
+        run: |
+          brew install dpkg
+          architecture="$(uname -m)"
+          case "$architecture" in
+            arm64) sha256=5dff8e6b8d9dc3ff7226276c81e09930865f15381f54cb55b98b196a94c5ca50 ;;
+            x86_64) sha256=9d46e0feedf96e399edfca09872802ba21e729f79c01927ad25ea2b0a35bca23 ;;
+            *) exit 1 ;;
+          esac
+          curl --fail --location --retry 3 \
+            "https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_macosx_$architecture" \
+            --output "$RUNNER_TEMP/ldid"
+          printf '%s  %s\n' "$sha256" "$RUNNER_TEMP/ldid" | shasum -a 256 -c -
+          chmod 755 "$RUNNER_TEMP/ldid"
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
       - name: Build Release and Debug
         run: |
           mkdir -p build
@@ -45,7 +61,7 @@ jobs:
             done
           done
 
-      - name: Package IPA
+      - name: Verify iOS 14.8 app
         run: |
           app=build/DerivedData/Build/Products/Release-iphoneos/Filos.app
           python3 - "$app" <<'PY'
@@ -69,15 +85,13 @@ jobs:
           assert (app / "AppIcon60x60@2x.png").is_file(), "Missing iPhone app icon"
           print(f"Executable minimum iOS versions: {versions}; concurrency runtime and app icon present")
           PY
-          mkdir -p build/Payload
-          cp -R "$app" build/Payload/Filos.app
-          cd build
-          zip -qr Filos-unsigned.ipa Payload
+      - name: Package rootful Debian app
+        run: bash debbuild.sh build/DerivedData/Build/Products/Release-iphoneos/Filos.app
 
       - uses: actions/upload-artifact@v7
         with:
-          name: Filos-unsigned
-          path: build/Filos-unsigned.ipa
+          name: Filos-rootful
+          path: build/packages/*.deb
           if-no-files-found: error
 
       - uses: actions/upload-artifact@v7

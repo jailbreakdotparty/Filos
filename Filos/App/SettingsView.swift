@@ -34,7 +34,7 @@ struct SettingsView: View {
                             Image(systemName: mgr.tokenVaild ? "checkmark.circle" : "xmark.circle")
                             Text(mgr.tokenVaild ? "Valid" : "Invalid")
                         }
-                        .compatibleForegroundColor(mgr.tokenVaild ? .green : .red)
+                        .foregroundColor(mgr.tokenVaild ? .green : .red)
                         Spacer()
                         if !mgr.tokenVaild {
                             Button("Consume") {
@@ -50,11 +50,12 @@ struct SettingsView: View {
                                 }
                             }
                         } else {
-                            CompatibleButton("Eject", role: .destructive) {
+                            Button("Eject") {
                                 sbxToken = ""
                                 mgr.tokenVaild = false
                                 Alertinator.shared.alert(title: "Token Ejected", body: "To reset file permissions, you'll have to restart the app. Would you like to exit now?", actionLabel: "Confirm", action: { exitinator() })
                             }
+                            .foregroundColor(.red)
                         }
                     }
                     Toggle("Consume on Launch", isOn: $consumeOnLaunch)
@@ -114,7 +115,7 @@ struct SettingsView: View {
                     Button {
                         onClose()
                     } label: {
-                        ToolbarLabel("Close", symbol: "xmark")
+                        Text("Close")
                     }
                 }
             }
