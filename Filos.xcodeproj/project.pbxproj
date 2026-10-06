@@ -3,37 +3,93 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		CC48540A300BC5A0007D98D0 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = CC485409300BC5A0007D98D0 /* ZIPFoundation */; };
+		F14800010000000000000000 /* FavoritesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000000 /* FavoritesSheet.swift */; };
+		F14800010000000000000001 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000001 /* LogView.swift */; };
+		F14800010000000000000002 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000002 /* SettingsView.swift */; };
+		F14800010000000000000003 /* FileBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000003 /* FileBrowserView.swift */; };
+		F14800010000000000000004 /* FileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000004 /* FileRow.swift */; };
+		F14800010000000000000005 /* FolderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000005 /* FolderRow.swift */; };
+		F14800010000000000000006 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000006 /* ContentView.swift */; };
+		F14800010000000000000007 /* FilosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000007 /* FilosApp.swift */; };
+		F14800010000000000000008 /* FilosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000008 /* FilosManager.swift */; };
+		F14800010000000000000009 /* Alertinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000009 /* Alertinator.swift */; };
+		F1480001000000000000000A /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000A /* AppInfo.swift */; };
+		F1480001000000000000000B /* Exitinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000B /* Exitinator.swift */; };
+		F1480001000000000000000C /* Hapticinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000C /* Hapticinator.swift */; };
+		F1480001000000000000000D /* Shareinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000D /* Shareinator.swift */; };
+		F1480001000000000000000E /* ExtraHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000E /* ExtraHelpers.swift */; };
+		F1480001000000000000000F /* FileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000000F /* FileHelpers.swift */; };
+		F14800010000000000000010 /* FileItemHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000010 /* FileItemHelpers.swift */; };
+		F14800010000000000000011 /* InfoHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000011 /* InfoHelpers.swift */; };
+		F14800010000000000000012 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000012 /* ViewExtensions.swift */; };
+		F14800010000000000000013 /* CompactAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000013 /* CompactAlert.swift */; };
+		F14800010000000000000014 /* PlainAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000014 /* PlainAlert.swift */; };
+		F14800010000000000000015 /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000015 /* ButtonLabel.swift */; };
+		F14800010000000000000016 /* PlainToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000016 /* PlainToggle.swift */; };
+		F14800010000000000000017 /* TextFieldBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000017 /* TextFieldBackground.swift */; };
+		F14800010000000000000018 /* ToolbarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000018 /* ToolbarLabel.swift */; };
+		F14800010000000000000019 /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000019 /* HeaderLabel.swift */; };
+		F1480001000000000000001A /* NavigationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001A /* NavigationLabel.swift */; };
+		F1480001000000000000001B /* SectionPlatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001B /* SectionPlatter.swift */; };
+		F1480001000000000000001C /* TerminalPlatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001C /* TerminalPlatter.swift */; };
+		F1480001000000000000001D /* AppInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001D /* AppInfoCell.swift */; };
+		F1480001000000000000001E /* LinkCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001E /* LinkCreditCell.swift */; };
+		F1480001000000000000001F /* InfoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1480002000000000000001F /* InfoViewer.swift */; };
+		F14800010000000000000020 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000020 /* ItemRow.swift */; };
+		F14800010000000000000021 /* ModifyItemPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000021 /* ModifyItemPage.swift */; };
+		F14800010000000000000022 /* PlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000022 /* PlistManager.swift */; };
+		F14800010000000000000023 /* PlistViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000023 /* PlistViewer.swift */; };
+		F14800010000000000000024 /* TextViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14800020000000000000024 /* TextViewer.swift */; };
+		F14800030000000000000000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F14800040000000000000000 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1531758F30094354008A92CE /* Filos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F14800020000000000000000 /* FavoritesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/FavoritesSheet.swift"; sourceTree = "<group>"; };
+		F14800020000000000000001 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/LogView.swift"; sourceTree = "<group>"; };
+		F14800020000000000000002 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/SettingsView.swift"; sourceTree = "<group>"; };
+		F14800020000000000000003 /* FileBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser/FileBrowserView.swift"; sourceTree = "<group>"; };
+		F14800020000000000000004 /* FileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser/FileRow.swift"; sourceTree = "<group>"; };
+		F14800020000000000000005 /* FolderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser/FolderRow.swift"; sourceTree = "<group>"; };
+		F14800020000000000000006 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView.swift"; sourceTree = "<group>"; };
+		F14800020000000000000007 /* FilosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilosApp.swift"; sourceTree = "<group>"; };
+		F14800020000000000000008 /* FilosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilosManager.swift"; sourceTree = "<group>"; };
+		F14800020000000000000009 /* Alertinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/Alertinator.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000A /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/AppInfo.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000B /* Exitinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/Exitinator.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000C /* Hapticinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/Hapticinator.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000D /* Shareinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/App/Shareinator.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000E /* ExtraHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/ExtraHelpers.swift"; sourceTree = "<group>"; };
+		F1480002000000000000000F /* FileHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/FileHelpers.swift"; sourceTree = "<group>"; };
+		F14800020000000000000010 /* FileItemHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/FileItemHelpers.swift"; sourceTree = "<group>"; };
+		F14800020000000000000011 /* InfoHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/InfoHelpers.swift"; sourceTree = "<group>"; };
+		F14800020000000000000012 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helpers/ViewExtensions.swift"; sourceTree = "<group>"; };
+		F14800020000000000000013 /* CompactAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Alerts/CompactAlert.swift"; sourceTree = "<group>"; };
+		F14800020000000000000014 /* PlainAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Alerts/PlainAlert.swift"; sourceTree = "<group>"; };
+		F14800020000000000000015 /* ButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Interactions/ButtonLabel.swift"; sourceTree = "<group>"; };
+		F14800020000000000000016 /* PlainToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Interactions/PlainToggle.swift"; sourceTree = "<group>"; };
+		F14800020000000000000017 /* TextFieldBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Interactions/TextFieldBackground.swift"; sourceTree = "<group>"; };
+		F14800020000000000000018 /* ToolbarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Interactions/ToolbarLabel.swift"; sourceTree = "<group>"; };
+		F14800020000000000000019 /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Lists/HeaderLabel.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001A /* NavigationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Lists/NavigationLabel.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001B /* SectionPlatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Lists/SectionPlatter.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001C /* TerminalPlatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Lists/TerminalPlatter.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001D /* AppInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Settings/AppInfoCell.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001E /* LinkCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI/Settings/LinkCreditCell.swift"; sourceTree = "<group>"; };
+		F1480002000000000000001F /* InfoViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/InfoViewer.swift"; sourceTree = "<group>"; };
+		F14800020000000000000020 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/Plist/ItemRow.swift"; sourceTree = "<group>"; };
+		F14800020000000000000021 /* ModifyItemPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/Plist/ModifyItemPage.swift"; sourceTree = "<group>"; };
+		F14800020000000000000022 /* PlistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/Plist/PlistManager.swift"; sourceTree = "<group>"; };
+		F14800020000000000000023 /* PlistViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/Plist/PlistViewer.swift"; sourceTree = "<group>"; };
+		F14800020000000000000024 /* TextViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Viewers/TextViewer.swift"; sourceTree = "<group>"; };
+		F14800040000000000000000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = App/Assets.xcassets; sourceTree = "<group>"; };
+		F14800040000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		1549FD973009472D003C1171 /* Exceptions for "Filos" folder in "Filos" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 1531758E30094354008A92CE /* Filos */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		1531759130094354008A92CE /* Filos */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				1549FD973009472D003C1171 /* Exceptions for "Filos" folder in "Filos" target */,
-			);
-			path = Filos;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1531758C30094354008A92CE /* Frameworks */ = {
@@ -47,6 +103,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1531759130094354008A92CE /* Filos */ = {
+			isa = PBXGroup;
+			children = (
+				F14800020000000000000000 /* FavoritesSheet.swift */,
+				F14800020000000000000001 /* LogView.swift */,
+				F14800020000000000000002 /* SettingsView.swift */,
+				F14800020000000000000003 /* FileBrowserView.swift */,
+				F14800020000000000000004 /* FileRow.swift */,
+				F14800020000000000000005 /* FolderRow.swift */,
+				F14800020000000000000006 /* ContentView.swift */,
+				F14800020000000000000007 /* FilosApp.swift */,
+				F14800020000000000000008 /* FilosManager.swift */,
+				F14800020000000000000009 /* Alertinator.swift */,
+				F1480002000000000000000A /* AppInfo.swift */,
+				F1480002000000000000000B /* Exitinator.swift */,
+				F1480002000000000000000C /* Hapticinator.swift */,
+				F1480002000000000000000D /* Shareinator.swift */,
+				F1480002000000000000000E /* ExtraHelpers.swift */,
+				F1480002000000000000000F /* FileHelpers.swift */,
+				F14800020000000000000010 /* FileItemHelpers.swift */,
+				F14800020000000000000011 /* InfoHelpers.swift */,
+				F14800020000000000000012 /* ViewExtensions.swift */,
+				F14800020000000000000013 /* CompactAlert.swift */,
+				F14800020000000000000014 /* PlainAlert.swift */,
+				F14800020000000000000015 /* ButtonLabel.swift */,
+				F14800020000000000000016 /* PlainToggle.swift */,
+				F14800020000000000000017 /* TextFieldBackground.swift */,
+				F14800020000000000000018 /* ToolbarLabel.swift */,
+				F14800020000000000000019 /* HeaderLabel.swift */,
+				F1480002000000000000001A /* NavigationLabel.swift */,
+				F1480002000000000000001B /* SectionPlatter.swift */,
+				F1480002000000000000001C /* TerminalPlatter.swift */,
+				F1480002000000000000001D /* AppInfoCell.swift */,
+				F1480002000000000000001E /* LinkCreditCell.swift */,
+				F1480002000000000000001F /* InfoViewer.swift */,
+				F14800020000000000000020 /* ItemRow.swift */,
+				F14800020000000000000021 /* ModifyItemPage.swift */,
+				F14800020000000000000022 /* PlistManager.swift */,
+				F14800020000000000000023 /* PlistViewer.swift */,
+				F14800020000000000000024 /* TextViewer.swift */,
+				F14800040000000000000000 /* Assets.xcassets */,
+				F14800040000000000000001 /* Info.plist */,
+			);
+			path = Filos;
+			sourceTree = "<group>";
+		};
+
 		1531758630094354008A92CE = {
 			isa = PBXGroup;
 			children = (
@@ -77,9 +180,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				1531759130094354008A92CE /* Filos */,
 			);
 			name = Filos;
 			packageProductDependencies = (
@@ -112,11 +212,10 @@
 				Base,
 			);
 			mainGroup = 1531758630094354008A92CE;
-			minimizedProjectReferenceProxies = 1;
+			compatibilityVersion = "Xcode 14.0";
 			packageReferences = (
 				CC485408300BC5A0007D98D0 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 1531759030094354008A92CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -131,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F14800030000000000000000 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +241,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F14800010000000000000000 /* FavoritesSheet.swift in Sources */,
+				F14800010000000000000001 /* LogView.swift in Sources */,
+				F14800010000000000000002 /* SettingsView.swift in Sources */,
+				F14800010000000000000003 /* FileBrowserView.swift in Sources */,
+				F14800010000000000000004 /* FileRow.swift in Sources */,
+				F14800010000000000000005 /* FolderRow.swift in Sources */,
+				F14800010000000000000006 /* ContentView.swift in Sources */,
+				F14800010000000000000007 /* FilosApp.swift in Sources */,
+				F14800010000000000000008 /* FilosManager.swift in Sources */,
+				F14800010000000000000009 /* Alertinator.swift in Sources */,
+				F1480001000000000000000A /* AppInfo.swift in Sources */,
+				F1480001000000000000000B /* Exitinator.swift in Sources */,
+				F1480001000000000000000C /* Hapticinator.swift in Sources */,
+				F1480001000000000000000D /* Shareinator.swift in Sources */,
+				F1480001000000000000000E /* ExtraHelpers.swift in Sources */,
+				F1480001000000000000000F /* FileHelpers.swift in Sources */,
+				F14800010000000000000010 /* FileItemHelpers.swift in Sources */,
+				F14800010000000000000011 /* InfoHelpers.swift in Sources */,
+				F14800010000000000000012 /* ViewExtensions.swift in Sources */,
+				F14800010000000000000013 /* CompactAlert.swift in Sources */,
+				F14800010000000000000014 /* PlainAlert.swift in Sources */,
+				F14800010000000000000015 /* ButtonLabel.swift in Sources */,
+				F14800010000000000000016 /* PlainToggle.swift in Sources */,
+				F14800010000000000000017 /* TextFieldBackground.swift in Sources */,
+				F14800010000000000000018 /* ToolbarLabel.swift in Sources */,
+				F14800010000000000000019 /* HeaderLabel.swift in Sources */,
+				F1480001000000000000001A /* NavigationLabel.swift in Sources */,
+				F1480001000000000000001B /* SectionPlatter.swift in Sources */,
+				F1480001000000000000001C /* TerminalPlatter.swift in Sources */,
+				F1480001000000000000001D /* AppInfoCell.swift in Sources */,
+				F1480001000000000000001E /* LinkCreditCell.swift in Sources */,
+				F1480001000000000000001F /* InfoViewer.swift in Sources */,
+				F14800010000000000000020 /* ItemRow.swift in Sources */,
+				F14800010000000000000021 /* ModifyItemPage.swift in Sources */,
+				F14800010000000000000022 /* PlistManager.swift in Sources */,
+				F14800010000000000000023 /* PlistViewer.swift in Sources */,
+				F14800010000000000000024 /* TextViewer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +425,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.8;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
@@ -335,7 +472,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.8;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
