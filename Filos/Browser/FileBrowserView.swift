@@ -89,7 +89,7 @@ struct FileBrowserView: View {
                 }
                 .compatibleSearchable(text: $searchText)
                 .compatibleRefreshable {
-                    mgr.refreshFiles.toggle()
+                    await MainActor.run { mgr.refreshFiles.toggle() }
                 }
             } else {
                 VStack(spacing: 8) {

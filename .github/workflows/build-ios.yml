@@ -23,50 +23,51 @@ jobs:
           xcodebuild -version
           xcrun --sdk iphoneos --show-sdk-version
 
-      - name: Inspect SDK declarations
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import subprocess
-          sdk = Path(subprocess.check_output(["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], text=True).strip())
-          interface = sdk / "System/Library/Frameworks/SwiftUI.framework/Modules/SwiftUI.swiftmodule/arm64-apple-ios.swiftinterface"
-          lines = interface.read_text().splitlines()
-          names = ("init(@SwiftUI.ViewBuilder content: () -> Content", "init<C>(_ data: SwiftUI.Binding<C>", "static var topBarLeading", "static func rect(cornerRadius:", "func animation<V>", "func fill<S>", "init(_ color: UIKit.UIColor)", "func onDelete", "func deleteDisabled", "func quickLookPreview")
-          for index, line in enumerate(lines):
-              if any(name in line for name in names):
-                  print("\n".join(lines[max(0, index - 3):index + 2]))
-          PY
-
-      - name: Build
+      - name: Build Release and Debug
         run: |
           mkdir -p build
           set -o pipefail
-          xcodebuild -project Filos.xcodeproj -scheme Filos \
-            -configuration Release -sdk iphoneos \
-            -destination 'generic/platform=iOS' \
-            -derivedDataPath build/DerivedData \
-            CODE_SIGNING_ALLOWED=NO build 2>&1 | tee build/xcodebuild.log
+          for configuration in Release Debug; do
+            xcodebuild -project Filos.xcodeproj -scheme Filos \
+              -configuration "$configuration" -sdk iphoneos \
+              -destination 'generic/platform=iOS' \
+              -derivedDataPath build/DerivedData \
+              CODE_SIGNING_ALLOWED=NO build 2>&1 | tee "build/$configuration.log"
+          done
 
       - name: Report build errors
         if: failure()
         run: |
-          if [ -f build/xcodebuild.log ]; then
-            grep -E 'error:|incompatible|cannot be opened' build/xcodebuild.log | while IFS= read -r line; do
+          for log in build/*.log; do
+            [ -f "$log" ] || continue
+            grep -E 'error:|incompatible|cannot be opened' "$log" | while IFS= read -r line; do
               printf '::error::%s\n' "$line"
             done
-          fi
+          done
 
       - name: Package IPA
         run: |
           app=build/DerivedData/Build/Products/Release-iphoneos/Filos.app
-          python3 - "$app/Info.plist" <<'PY'
+          python3 - "$app" <<'PY'
+          from pathlib import Path
           import plistlib
+          import re
+          import subprocess
           import sys
-          with open(sys.argv[1], "rb") as file:
+          app = Path(sys.argv[1])
+          with (app / "Info.plist").open("rb") as file:
               info = plistlib.load(file)
           minimum = tuple(map(int, info["MinimumOSVersion"].split(".")))
           assert minimum <= (14, 8), f"App requires iOS {info['MinimumOSVersion']}, newer than iOS 14.8"
           print(f"Minimum iOS version: {info['MinimumOSVersion']}")
+          binary = app / info["CFBundleExecutable"]
+          commands = subprocess.check_output(["xcrun", "otool", "-l", str(binary)], text=True)
+          versions = re.findall(r"\bminos\s+([\d.]+)", commands)
+          assert versions, "Executable minimum iOS version was not found"
+          assert all(tuple(map(int, version.split("."))) <= (14, 8) for version in versions), versions
+          assert (app / "Frameworks/libswift_Concurrency.dylib").is_file(), "Missing Swift concurrency runtime for iOS 14"
+          assert (app / "AppIcon60x60@2x.png").is_file(), "Missing iPhone app icon"
+          print(f"Executable minimum iOS versions: {versions}; concurrency runtime and app icon present")
           PY
           mkdir -p build/Payload
           cp -R "$app" build/Payload/Filos.app
@@ -83,5 +84,5 @@ jobs:
         if: failure()
         with:
           name: build-log
-          path: build/xcodebuild.log
+          path: build/*.log
           if-no-files-found: ignore
