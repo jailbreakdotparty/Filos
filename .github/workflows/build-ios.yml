@@ -1,0 +1,87 @@
+name: Build iOS
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    # Xcode 15.4 supports iOS 14 devices. GitHub retires this image on 2026-11-02.
+    runs-on: macos-14
+    timeout-minutes: 30
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_15.4.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check Xcode
+        run: |
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+
+      - name: Inspect SDK declarations
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          sdk = Path(subprocess.check_output(["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], text=True).strip())
+          interface = sdk / "System/Library/Frameworks/SwiftUI.framework/Modules/SwiftUI.swiftmodule/arm64-apple-ios.swiftinterface"
+          lines = interface.read_text().splitlines()
+          names = ("init(content: () -> Content, header:", "init<C>(_ data: SwiftUI.Binding<C>", "static var topBarLeading", "static func rect(cornerRadius:", "func animation<V>", "func fill<S>")
+          for index, line in enumerate(lines):
+              if any(name in line for name in names):
+                  print("\n".join(lines[max(0, index - 3):index + 2]))
+          PY
+
+      - name: Build
+        run: |
+          mkdir -p build
+          set -o pipefail
+          xcodebuild -project Filos.xcodeproj -scheme Filos \
+            -configuration Release -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO build 2>&1 | tee build/xcodebuild.log
+
+      - name: Report build errors
+        if: failure()
+        run: |
+          if [ -f build/xcodebuild.log ]; then
+            grep -E 'error:|incompatible|cannot be opened' build/xcodebuild.log | while IFS= read -r line; do
+              printf '::error::%s\n' "$line"
+            done
+          fi
+
+      - name: Package IPA
+        run: |
+          app=build/DerivedData/Build/Products/Release-iphoneos/Filos.app
+          python3 - "$app/Info.plist" <<'PY'
+          import plistlib
+          import sys
+          with open(sys.argv[1], "rb") as file:
+              info = plistlib.load(file)
+          minimum = tuple(map(int, info["MinimumOSVersion"].split(".")))
+          assert minimum <= (14, 8), f"App requires iOS {info['MinimumOSVersion']}, newer than iOS 14.8"
+          print(f"Minimum iOS version: {info['MinimumOSVersion']}")
+          PY
+          mkdir -p build/Payload
+          cp -R "$app" build/Payload/Filos.app
+          cd build
+          zip -qr Filos-unsigned.ipa Payload
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Filos-unsigned
+          path: build/Filos-unsigned.ipa
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: build-log
+          path: build/xcodebuild.log
+          if-no-files-found: ignore
