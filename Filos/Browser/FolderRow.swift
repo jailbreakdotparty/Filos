@@ -22,7 +22,7 @@ struct FolderRow: View {
         Button {
             mgr.push(item.destURL)
         } label: {
-            HStack(spacing: fileRowSpacing) {
+            HStack(spacing: 10) {
                 Group {
                     if fm.fileExists(atPath: item.fileURL.appendingPathComponent(".com.apple.mobile_container_manager.metadata.plist").path) || fm.fileExists(atPath: item.fileURL.appendingPathComponent("Info.plist").path) {
                         Image(systemName: "app")
