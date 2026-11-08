@@ -16,11 +16,9 @@ struct FolderRow: View {
     var parent: FileItem
     @Binding var previewer: FBPreviewer?
     
-    @State private var folderType: FolderType = .normal
-    
     var body: some View {
         Button {
-            mgr.push(item.destURL)
+            mgr.fmNavPath.append(item.destURL)
         } label: {
             HStack(spacing: fileRowSpacing) {
                 Group {
@@ -28,7 +26,7 @@ struct FolderRow: View {
                         Image(systemName: "app")
                             .frame(width: 20, alignment: .center)
                         VStack(alignment: .leading) {
-                            Text(getNameFromInfP(item.fileURL) ?? getBIDFromMCM(item.fileURL) ?? item.name)
+                            Text(folderLabel(url: item.fileURL))
                                 .foregroundStyle(item.hidden ? .secondary : .primary)
                                 .lineLimit(1)
                                 .truncationMode(.middle)

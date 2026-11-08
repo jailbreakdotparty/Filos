@@ -1,14 +1,35 @@
 //
-//  FileHelpers.swift
+//  FileHandlers.swift
 //  Filos
 //
 //  Created by lunginspector on 7/22/26.
 //
 
 import SwiftUI
-
 import ZIPFoundation
 import UniformTypeIdentifiers
+
+// thanks to skadz108 for this helper
+func sbxConsume(_ token: String) -> Bool {
+    typealias sbxConsumeFunc = @convention(c) (UnsafePointer<CChar>?) -> Int64
+    
+    guard let sbxLib = dlopen("/usr/lib/system/libsystem_sandbox.dylib", RTLD_NOW) else {
+        return false
+    }
+    defer { dlclose(sbxLib) }
+    
+    guard let sbxConsumeSymbol = dlsym(sbxLib, "sandbox_extension_consume") else {
+        return false
+    }
+    
+    let consume = unsafeBitCast(sbxConsumeSymbol, to: sbxConsumeFunc.self)
+    
+    let result = consume(token)
+    if result >= 1 {
+        return true
+    }
+    return false
+}
 
 enum FSPaths {
     static var appBundles = "/private/var/containers/Bundle/Application"

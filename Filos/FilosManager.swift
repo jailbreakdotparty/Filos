@@ -26,14 +26,10 @@ final class FilosManager: ObservableObject {
     @Published var refreshFiles = false
     @Published var logOutput = ""
     @Published var tokenVaild = false
-    @Published var navArray: [NavItem] = []
-    @AppStorage("favList") private var favorites: [FavoriteItem] = []
+    @Published var fmNavPath = NavigationPath()
+    @AppStorage("favList") var favorites: [FavoriteItem] = []
     
     init() { }
-    
-    func push(_ url: URL) {
-        navArray.append(NavItem(url: url))
-    }
     
     func isFavorited(_ item: FileItem) -> Bool {
         if let _ = favorites.firstIndex(where: { $0.path == item.fileURL.path }) {

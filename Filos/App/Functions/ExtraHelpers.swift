@@ -7,29 +7,6 @@
 
 import SwiftUI
 
-
-// thanks to skadz108 for this helper
-func sbxConsume(_ token: String) -> Bool {
-    typealias sbxConsumeFunc = @convention(c) (UnsafePointer<CChar>?) -> Int64
-    
-    guard let sbxLib = dlopen("/usr/lib/system/libsystem_sandbox.dylib", RTLD_NOW) else {
-        return false
-    }
-    defer { dlclose(sbxLib) }
-    
-    guard let sbxConsumeSymbol = dlsym(sbxLib, "sandbox_extension_consume") else {
-        return false
-    }
-    
-    let consume = unsafeBitCast(sbxConsumeSymbol, to: sbxConsumeFunc.self)
-    
-    let result = consume(token)
-    if result >= 1 {
-        return true
-    }
-    return false
-}
-
 // make strings compatiable with errors
 extension String: @retroactive Error {}
 
@@ -68,15 +45,6 @@ func machineName() -> String {
     return machineMirror.children.reduce("") { identifier, element in
         guard let value = element.value as? Int8, value != 0 else { return identifier }
         return identifier + String(UnicodeScalar(UInt8(value)))
-    }
-}
-
-extension ButtonRole {
-    static var adaptiveConfirm: ButtonRole? {
-        if #available(iOS 19.0, *) {
-            return .confirm
-        }
-        return nil
     }
 }
 

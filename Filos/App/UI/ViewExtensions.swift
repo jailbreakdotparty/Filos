@@ -31,3 +31,12 @@ extension View {
         self.environment(\EnvironmentValues.refresh as! WritableKeyPath<EnvironmentValues, RefreshAction?>, nil)
     }
 }
+
+extension ButtonRole {
+    static var adaptiveConfirm: ButtonRole? {
+        if #available(iOS 19.0, *) {
+            return .confirm
+        }
+        return nil
+    }
+}

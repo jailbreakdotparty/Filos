@@ -246,9 +246,12 @@ struct FileBrowserView: View {
                         Alertinator.shared.prompt(title: "Where would you like to go?", text: item.fileURL.path, completion: { path in
                             let path = generateNavPath(path: path ?? "")
                             
+                            mgr.fmNavPath.append(URL(fileURLWithPath: path))
+                            /*
                             if !path.isEmpty {
                                 mgr.push(URL(fileURLWithPath: path))
                             }
+                             */
                         })
                     } label: {
                         Label("Go to Directory...", systemImage: "arrow.right.arrow.left")

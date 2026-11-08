@@ -1,5 +1,5 @@
 //
-//  FileItemHelpers.swift
+//  FileItemHandlers.swift
 //  Filos
 //
 //  Created by lunginspector on 8/1/26.

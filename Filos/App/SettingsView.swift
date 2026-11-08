@@ -15,6 +15,8 @@ struct SettingsView: View {
     @AppStorage("sbxToken") var sbxToken = ""
     @AppStorage("consumeOnLaunch") var consumeOnLaunch = false
     
+    @AppStorage("startDir") var startDir = "/"
+    @AppStorage("showPreviews") var showPreviews = false
     @AppStorage("listStyle") var listStyle = 1
     @AppStorage("hideFavs") var hideFavs = false
     @AppStorage("hideDates") var hideDates = false
@@ -63,15 +65,26 @@ struct SettingsView: View {
                 }
                 
                 Section {
+                    HStack {
+                        Text("Start Directory")
+                        Spacer()
+                        TextField("/", text: $startDir)
+                            .multilineTextAlignment(.trailing)
+                            .lineLimit(1)
+                    }
                     Picker("List Style", selection: $listStyle) {
                         Text("Default").tag(1)
                         Text("Plain").tag(2)
                         Text("Grouped").tag(3)
                     }
+                } header: {
+                    HeaderLabel("View Options", symbol: "eyes")
+                }
+                
+                Section {
+                    Toggle("Show File Previews", isOn: $showPreviews)
                     Toggle("Hide \"Favorite\" Button", isOn: $hideFavs)
                     Toggle("Hide Dates", isOn: $hideDates)
-                } header: {
-                    HeaderLabel("View Options", symbol: "eye")
                 }
                 
                 Section {

@@ -31,6 +31,7 @@ let fileRowSpacing: CGFloat = {
 struct FileRow: View {
     @EnvironmentObject var mgr: FilosManager
     @AppStorage("hideDates") var hideDates = false
+    @AppStorage("showPreviews") var showPreviews = false
     var item: FileItem
     var parent: FileItem
     @Binding var previewer: FBPreviewer?
@@ -44,9 +45,18 @@ struct FileRow: View {
             fileTapAction()
         } label: {
             HStack(spacing: fileRowSpacing) {
-                Image(systemName: item.type == .file ? "doc" : "arrow.up.right.circle")
-                    .foregroundStyle(item.hidden ? .secondary : .primary)
-                    .frame(width: 20, alignment: .center)
+                if showPreviews && (item.uttype == .jpeg || item.uttype == .png), let data = try? Data(contentsOf: item.fileURL), let image = UIImage(data: data) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .background(Color(.systemGray5))
+                        .clipShape(.rect(cornerRadius: 4))
+                } else {
+                    Image(systemName: item.type == .file ? "doc" : "arrow.up.right.circle")
+                        .foregroundStyle(item.hidden ? .secondary : .primary)
+                        .frame(width: 20, alignment: .center)
+                }
                 
                 VStack(alignment: .leading) {
                     Text(item.name)
@@ -291,7 +301,8 @@ struct FileRow: View {
     // MARK: functions
     private func fileTapAction() {
         if item.type == .symlink {
-            mgr.push(item.destURL)
+            //mgr.push(item.destURL)
+            mgr.fmNavPath.append(item.destURL)
         } else {
             if conformsZip {
                 if !fm.fileExists(atPath: item.fileURL.deletingPathExtension().path) {
